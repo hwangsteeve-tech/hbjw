@@ -653,6 +653,91 @@ class Body:
     def spacer(self, b):
         self.y += float(b.get("h", 0.3))
 
+    def kpi(self, b):
+        """핵심 수치 타일: items: [{value, unit, label}]"""
+        items = b["items"]
+        n = len(items)
+        gap = 0.3
+        w = (W - 0.2 - gap * (n - 1)) / n
+        h = b.get("height", 2.4)
+        self.warn(h, "kpi")
+        for i, it in enumerate(items):
+            x = X0 + 0.1 + i * (w + gap)
+            _shape(self.s, "RECTANGLE", x, self.y, w, h, fill="EEF4FB", line=LIGHT_LINE)
+            _shape(self.s, "RECTANGLE", x, self.y, 0.12, h, fill=BLUE)
+            tb = _text_box(self.s, x + 0.3, self.y + 0.15, w - 0.45, 1.1, anchor="m")
+            par = tb.text_frame.paragraphs[0]
+            _add_runs(par, str(it["value"]), b.get("size", 24), FONT_B, NAVY)
+            if it.get("unit"):
+                _add_runs(par, " " + it["unit"], 11, FONT_B, NAVY)
+            lb = _text_box(self.s, x + 0.3, self.y + 1.25, w - 0.45, h - 1.35, inset=0.02)
+            par = lb.text_frame.paragraphs[0]
+            _para_fmt(par, line=1.25)
+            _add_runs(par, it["label"], 9.5, FONT_M, "404040")
+        self.y += h + 0.35
+
+    def themes(self, b):
+        """번호 카드(차별화 요소 등): items: [{title, text, points:[...]}] — 번호는 순서대로 01, 02 …"""
+        items = b["items"]
+        size = b.get("size", 10)
+        num_w = 1.5
+        tx = X0 + 0.1 + num_w + 0.3
+        tw = W - 0.2 - num_w - 0.5
+        total = 0
+        layout = []
+        for it in items:
+            hh = 0.75 + _est_lines(it.get("text", ""), size, tw) * _line_cm(size, 1.3) + 0.15
+            pts = it.get("points", [])
+            ph = sum(_est_lines(p, size - 0.5, tw - 0.6) * _line_cm(size - 0.5, 1.25) + 0.08 for p in pts)
+            hh += (ph + 0.35) if pts else 0
+            hh = max(hh, num_w + 0.3)
+            layout.append((hh, ph))
+            total += hh + 0.25
+        self.warn(total, "themes")
+        y = self.y
+        for i, (it, (hh, ph)) in enumerate(zip(items, layout), start=b.get("start", 1)):
+            _shape(self.s, "RECTANGLE", X0 + 0.1, y, W - 0.2, hh, fill="FFFFFF", line=LIGHT_LINE)
+            nb = _shape(self.s, "RECTANGLE", X0 + 0.1, y, num_w, num_w, fill=NAVY)
+            _fill_shape_text(nb, f"{b.get('prefix', '')}{i:02d}", 18, FONT_B, "FFFFFF")
+            tb = _text_box(self.s, tx, y + 0.12, tw, 0.65, anchor="m")
+            _add_runs(tb.text_frame.paragraphs[0], it["title"], 12, FONT_B, "000000")
+            yy = y + 0.8
+            if it.get("text"):
+                th = _est_lines(it["text"], size, tw) * _line_cm(size, 1.3) + 0.1
+                t2 = _text_box(self.s, tx, yy, tw, th, inset=0.02)
+                p = t2.text_frame.paragraphs[0]
+                _para_fmt(p, line=1.3)
+                _add_runs(p, it["text"], size, FONT_M, "333333")
+                yy += th + 0.05
+            pts = it.get("points", [])
+            if pts:
+                _shape(self.s, "RECTANGLE", tx, yy, tw, ph + 0.25, fill="EEF4FB")
+                pb = _text_box(self.s, tx + 0.15, yy + 0.1, tw - 0.3, ph + 0.1, inset=0.02)
+                for k, t in enumerate(pts):
+                    p = pb.text_frame.paragraphs[0] if k == 0 else pb.text_frame.add_paragraph()
+                    _para_fmt(p, line=1.25, after=1)
+                    _bullet(p, "•", 108000, 108000)
+                    _add_runs(p, t, size - 0.5, FONT_M, "1F3864")
+            y += hh + 0.25
+        self.y = y + 0.1
+
+    def point(self, b):
+        """제목이 있는 강조 상자 (설계 관점 · 제안 요지 등): {title, text, color: green|blue|navy}"""
+        size = b.get("size", 10)
+        style = {"green": ("EAF6EF", "1E7B4F", "333333"), "blue": ("EEF4FB", BLUE, "333333"),
+                 "navy": (NAVY, "FFE699", "FFFFFF")}[b.get("color", "green")]
+        lines = _est_lines(b["text"], size, W - 0.8) * _line_cm(size, 1.35)
+        h = 0.75 + lines + 0.3
+        self.warn(h, "point")
+        _shape(self.s, "RECTANGLE", X0, self.y, W, h, fill=style[0])
+        tb = _text_box(self.s, X0 + 0.35, self.y + 0.15, W - 0.7, 0.55, anchor="m")
+        _add_runs(tb.text_frame.paragraphs[0], b["title"], 10.5, FONT_B, style[1])
+        t2 = _text_box(self.s, X0 + 0.35, self.y + 0.7, W - 0.7, lines + 0.2, inset=0.02)
+        p = t2.text_frame.paragraphs[0]
+        _para_fmt(p, line=1.35)
+        _add_runs(p, b["text"], size, FONT_M, style[2])
+        self.y += h + 0.3
+
 
 def _table(slide, x, y, w, rows, widths, size=9, row_h=None, heights=None, merge_first=False,
            first_col_fill=True, align=None):
@@ -780,7 +865,8 @@ def build(content_path: Path, out_path: Path, template: Path = BASE_TEMPLATE, re
         sldIdLst.insert(k, el)
     if report:
         for page, name, ratio in fill:
-            print(f"  p{page:>3} {ratio*100:5.0f}%  {name}")
+            flag = "  ← 여백 많음" if ratio < 0.8 else ""
+            print(f"  p{page:>3} {ratio*100:5.0f}%  {name}{flag}")
     set_pptx_author(prs)
     prs.save(str(out_path))
     print(f"저장: {out_path}  ({len(prs.slides)}장)")

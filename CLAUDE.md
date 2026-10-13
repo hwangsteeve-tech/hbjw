@@ -15,5 +15,6 @@
   제안서에는 직접 쓰지 말고 `include: company.general` / `company.history` / `company.finance` 슬라이드로 불러온다.
 - 생성되는 PPT·엑셀의 파일 정보(만든 이·마지막 수정한 사람)는 항상 `황보정운`이다 (h9_company.yaml `document_author`).
 - 빌드 후 LibreOffice로 PDF를 만들어 넘침·겹침을 눈으로 확인한다.
+- 본문 슬라이드는 빈 공간이 없게 채운다: `--report`에서 `← 여백 많음`(채움 80% 미만)이 뜨는 장은 표·흐름도·`kpi`·`point` 등 읽기 쉬운 블록을 더해 80% 이상으로 맞춘다.
 - 제안 발표자료는 `proposal_kit/build_presentation.py`(16:9)로 만들고, 형식은 `reference/h9_발표자료_예시_*.pdf`를 따른다.
   내용은 정성제안서를 압축하되 평가항목 조견표의 모든 항목에 해당 페이지가 생기도록 `eval`을 단다.

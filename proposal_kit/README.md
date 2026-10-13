@@ -120,3 +120,18 @@ content.yaml 의 slides 에 아래처럼 쓰면 빌드할 때 표준 슬라이�
 `header` · `h2` · `h3` · `summary` · `req` 를 지정하면 기본값을 덮어씁니다.
 결산이 바뀌면 `finance` 의 연도와 값, 기준월이 바뀌면 `biz_period` 를 고칩니다.
 생성되는 PPT·엑셀의 파일 정보(만든 이·마지막 수정한 사람)는 `document_author` 값으로 들어갑니다.
+
+## 빈 공간 채우기용 블록
+
+`--report` 는 채움 비율이 80% 미만인 장에 `← 여백 많음` 을 표시합니다. 이런 장에는 아래 블록을 더합니다.
+
+```yaml
+- type: kpi            # 핵심 수치 타일
+  items: [{value: "3", unit: 초 이내, label: "첫 토큰 응답 (평균)"}]
+- type: point          # 제목 있는 강조 상자 (color: green | blue | navy)
+  color: green
+  title: 설계 관점
+  text: "…"
+- type: themes         # 번호 카드 (prefix: "WT ", start: 4 로 번호 지정 가능)
+  items: [{title: "…", text: "…", points: ["…", "…"]}]
+```
