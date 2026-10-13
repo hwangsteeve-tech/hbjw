@@ -24,6 +24,8 @@ from pptx.enum.text import MSO_ANCHOR, MSO_AUTO_SIZE, PP_ALIGN
 from pptx.oxml.ns import qn
 from pptx.util import Cm, Pt
 
+from proposal_kit.company import set_pptx_author
+
 HERE = Path(__file__).resolve().parent
 BG_DIR = HERE / "templates" / "presentation"
 
@@ -869,6 +871,7 @@ def build(path: Path, out: Path, report=False):
     if report:
         for n, t, r in d.fill:
             print(f"  p{n:>3} {r * 100:5.0f}%  {t}")
+    set_pptx_author(d.prs)
     d.prs.save(str(out))
     print(f"저장: {out}  ({len(d.prs.slides)}장)")
 

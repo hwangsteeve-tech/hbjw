@@ -103,3 +103,20 @@ python -m proposal_kit.build_presentation proposals/2026-10_pnu-ai-platform/pres
 - 본문은 `columns: [{w: 비율, arrow_after: true, blocks: [...]}]`로 열을 나누거나 `blocks`만 씁니다.
 - 블록: `panel`(남색 제목 상자, 안에 blocks), `cards`, `flow`, `compare`(As-Is/To-Be), `layers`, `table`, `kpi`, `bullets`, `label`, `text`, `callout`, `note`
 - 강조: `**파랑**`, `!!빨강!!`
+
+## 회사 정보 불러오기 (일반현황 · 연혁 · 재무)
+
+회사 고유 정보는 `proposal_kit/company/h9_company.yaml` 한 곳에서 관리합니다.
+content.yaml 의 slides 에 아래처럼 쓰면 빌드할 때 표준 슬라이드로 펼쳐집니다.
+
+```yaml
+- include: company.general      # 일반현황 (extra_rows 로 공고별 행 추가)
+  extra_rows: [[입찰자격, "소프트웨어사업자(1468) ..."]]
+- include: company.history      # 주요 연혁
+- include: company.finance      # 자본금 및 매출액 (최근 3년) + 재무 지표
+  extra_blocks: [{type: note, text: "※ 기업신용평가등급: ..."}]
+```
+
+`header` · `h2` · `h3` · `summary` · `req` 를 지정하면 기본값을 덮어씁니다.
+결산이 바뀌면 `finance` 의 연도와 값, 기준월이 바뀌면 `biz_period` 를 고칩니다.
+생성되는 PPT·엑셀의 파일 정보(만든 이·마지막 수정한 사람)는 `document_author` 값으로 들어갑니다.

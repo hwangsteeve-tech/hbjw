@@ -21,6 +21,8 @@ from pptx import Presentation
 from pptx.oxml.ns import qn
 from pptx.util import Cm, Emu, Pt
 
+from proposal_kit.company import load_content, set_pptx_author
+
 HERE = Path(__file__).resolve().parent
 BASE_TEMPLATE = HERE / "templates" / "h9_base.pptx"
 
@@ -720,7 +722,7 @@ def _chapter_page_no(slide, label):
 # ---------------------------------------------------------------- 조립
 
 def build(content_path: Path, out_path: Path, template: Path = BASE_TEMPLATE, report=False):
-    data = yaml.safe_load(content_path.read_text(encoding="utf-8"))
+    data = load_content(content_path)
     prs = Presentation(str(template))
     n_proto = len(prs.slides)
     meta = data["meta"]
@@ -779,6 +781,7 @@ def build(content_path: Path, out_path: Path, template: Path = BASE_TEMPLATE, re
     if report:
         for page, name, ratio in fill:
             print(f"  p{page:>3} {ratio*100:5.0f}%  {name}")
+    set_pptx_author(prs)
     prs.save(str(out_path))
     print(f"저장: {out_path}  ({len(prs.slides)}장)")
 

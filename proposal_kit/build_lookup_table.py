@@ -18,6 +18,8 @@ from openpyxl import Workbook
 from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
 from openpyxl.worksheet.page import PageMargins
 
+from proposal_kit.company import load_content, set_xlsx_author
+
 FONT = "맑은 고딕"
 HEAD_FILL = PatternFill("solid", fgColor="FFF2CC")
 ITEM_FILL = PatternFill("solid", fgColor="F2F2F2")
@@ -150,6 +152,7 @@ def write_compliance_xlsx(rows, spec, out: Path):
     ws.sheet_properties.pageSetUpPr.fitToPage = True
     ws.page_margins = PageMargins(left=0.4, right=0.4, top=0.5, bottom=0.5)
     ws.oddFooter.center.text = "&P / &N"
+    set_xlsx_author(wb)
     wb.save(out)
 
 
@@ -228,6 +231,7 @@ def write_xlsx(rows, spec, out: Path):
     ws.sheet_properties.pageSetUpPr.fitToPage = True
     ws.page_margins = PageMargins(left=0.4, right=0.4, top=0.5, bottom=0.5)
     ws.oddFooter.center.text = "&P / &N"
+    set_xlsx_author(wb)
     wb.save(out)
 
 
@@ -237,7 +241,7 @@ def main(argv=None):
     ap.add_argument("spec", type=Path)
     ap.add_argument("-o", "--out", type=Path, required=True)
     args = ap.parse_args(argv)
-    content = yaml.safe_load(args.content.read_text(encoding="utf-8"))
+    content = load_content(args.content)
     spec = yaml.safe_load(args.spec.read_text(encoding="utf-8"))
     if spec.get("format") == "compliance":
         rows = build_compliance_rows(content, spec)
