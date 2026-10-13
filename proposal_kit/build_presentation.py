@@ -25,6 +25,7 @@ from pptx.oxml.ns import qn
 from pptx.util import Cm, Pt
 
 from proposal_kit.company import set_pptx_author
+from proposal_kit.style import finalize
 
 HERE = Path(__file__).resolve().parent
 BG_DIR = HERE / "templates" / "presentation"
@@ -801,7 +802,7 @@ def b_callout(s, b, x, y, w, room, spec):
 
 def b_note(s, b, x, y, w, room, spec):
     tb = tbox(s, x, y, w, 0.55)
-    add_text(tb.text_frame.paragraphs[0], b["text"], 8.5, FM, "7F7F7F")
+    add_text(tb.text_frame.paragraphs[0], b["text"], 9.5, FM, "666666")
     return 0.55
 
 
@@ -871,6 +872,7 @@ def build(path: Path, out: Path, report=False):
     if report:
         for n, t, r in d.fill:
             print(f"  p{n:>3} {r * 100:5.0f}%  {t}")
+    finalize(d.prs)
     set_pptx_author(d.prs)
     d.prs.save(str(out))
     print(f"저장: {out}  ({len(d.prs.slides)}장)")

@@ -22,6 +22,7 @@ from pptx.oxml.ns import qn
 from pptx.util import Cm, Emu, Pt
 
 from proposal_kit.company import load_content, set_pptx_author
+from proposal_kit.style import finalize
 
 HERE = Path(__file__).resolve().parent
 BASE_TEMPLATE = HERE / "templates" / "h9_base.pptx"
@@ -473,7 +474,7 @@ class Body:
         if b.get("caption"):
             self.caption({"text": b["caption"]})
         rows = [b["header"]] + b["rows"]
-        size = b.get("size", 10)
+        size = b.get("size", 10.5)
         widths = b.get("widths")
         total = W - 0.2
         if not widths:
@@ -629,17 +630,17 @@ class Body:
                 for k, it in enumerate(items):
                     bx = _shape(self.s, "ROUNDED_RECTANGLE", X0 + 3.2 + k * (iw + 0.15), y + 0.2, iw, lh - 0.4,
                                 fill="FFFFFF", adj=0.06)
-                    _fill_shape_text(bx, it, 8.5, FONT_B, "1F3864", inset=0.05)
+                    _fill_shape_text(bx, it, 9.5, FONT_B, "1F3864", inset=0.05)
             if l.get("side"):
                 sb = _shape(self.s, "RECTANGLE", X0 + 0.1 + main_w + 0.25, y, side_w, lh, fill="F4F8FC",
                             line=LIGHT_LINE)
-                _fill_shape_text(sb, l["side"], 8.5, FONT_M, "1F3864", inset=0.08)
+                _fill_shape_text(sb, l["side"], 9.5, FONT_M, "1F3864", inset=0.08)
         self.y += need + 0.2
 
     def note(self, b):
         tb = _text_box(self.s, X0, self.y - 0.1, W, 0.5)
         par = tb.text_frame.paragraphs[0]
-        _add_runs(par, b["text"], 8.5, FONT_M, "808080")
+        _add_runs(par, b["text"], 9.5, FONT_M, "666666")
         self.y += 0.5
 
     def callout(self, b):
@@ -867,6 +868,7 @@ def build(content_path: Path, out_path: Path, template: Path = BASE_TEMPLATE, re
         for page, name, ratio in fill:
             flag = "  ← 여백 많음" if ratio < 0.8 else ""
             print(f"  p{page:>3} {ratio*100:5.0f}%  {name}{flag}")
+    finalize(prs)
     set_pptx_author(prs)
     prs.save(str(out_path))
     print(f"저장: {out_path}  ({len(prs.slides)}장)")
