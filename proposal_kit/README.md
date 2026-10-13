@@ -84,6 +84,8 @@ python -m proposal_kit.build_lookup_table proposals/2026-10_pnu-ai-platform/cont
 
 `lookup_spec.yaml`에는 사업별로 RFP 요구사항(명칭·정의·쪽수)과 평가항목별 행 구성을 적습니다.
 요구사항 ID가 없는 평가항목(사업이해도, 일정계획 등)은 `chapter`와 `header`로 해당 절의 슬라이드를 찾습니다.
+특정 슬라이드만 가리킬 때는 `h3: ["2.1.1", "2.2.1"]`처럼 h3 번호 접두어를 추가합니다.
+RFP에 쪽 번호가 없으면 `rfp_ref_header: RFP 위치`로 열 이름을 바꾸고 `rfp_page`에 절 번호(예: Ⅳ.2.나.1))를 적습니다.
 
 ## 제안 발표자료 (16:9)
 

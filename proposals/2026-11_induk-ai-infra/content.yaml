@@ -480,6 +480,14 @@ chapters:
       - [Agent·Tool, "", "", "Agent Runtime·Studio·Tool/API"]
       - [UX·포털, "", "", "포털·Studio 화면 설계·디자인"]
       - [품질(QA), "", "", "Golden Q 평가·시험·산출물 검토"]
+    - type: subtitle
+      text: < 단계별 시험 체계 >
+    - type: flow
+      steps:
+      - {title: 단위 시험, desc: "모듈·API별 개발자 시험"}
+      - {title: 통합 시험, desc: "연계·Agent 시나리오"}
+      - {title: 부하 시험, desc: "동시 1,400명·응답 3초"}
+      - {title: 인수 시험, desc: "대학 TF·감리 확인"}
     - type: note
       text: "※ 제안 투입 인원수 유지, 교체 시 동급 인력·대학 승인 (핵심인력 50% 초과 교체 시 계약 해제 조건 인지)"
 

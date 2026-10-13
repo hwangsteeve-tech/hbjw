@@ -1,0 +1,556 @@
+# 인덕대학교 「대학 AI 인프라 기반 구축」 제안 발표자료 (16:9)
+# 발표 2026-11-19 14:00 — 40분 (발표 10분 + PoC·질의응답 30분), PM 직접 발표
+# 빌드: python -m proposal_kit.build_presentation proposals/2026-11_induk-ai-infra/presentation.yaml -o proposals/2026-11_induk-ai-infra/발표자료.pptx --report
+
+meta:
+  doc_type: 제안 발표 자료
+  title: 대학 AI 인프라 기반 구축 (AI 데이터 스퀘어)
+  pm_label: "사업PM "
+  pm_name: 【성명】
+  pm_title: ""
+  org_lines: ["제안사: 주식회사 에이치나인", "발주기관: 인덕대학교"]
+  client: 인덕대학교
+  logos: [HNINE]
+
+eval_items:
+  - {group: 정량 평가, item: 정량 평가, criteria: "경영 상태 5 · 유사 사업 실적 5 · 연관 사업 실적 5", score: 15, page_text: 별도 평가}
+  - {group: 전략 및 방법론, item: 전략 및 방법론, criteria: 대학의 사업 목표 이해도 및 추진 전략의 타당성, score: 5}
+  - {group: 기술 및 기능 제안, item: "[인프라]", criteria: "Private AI, LLM 게이트웨이 등 최적 아키텍처 및 유연성", score: 5}
+  - {group: 기술 및 기능 제안, item: "[지식DB]", criteria: "비정형(HWP, PDF) 문서 전처리 및 지식 카탈로그 구축", score: 10}
+  - {group: 기술 및 기능 제안, item: "[AI 서비스]", criteria: "Agent 스튜디오 구축 및 외부 API/데이터 연계", score: 10}
+  - {group: PoC, item: 파싱 정확도 검증, criteria: "샘플 문서(표 포함) 텍스트 추출 완결성", score: 7}
+  - {group: PoC, item: RAG 품질 검증, criteria: 질의응답 정확도 및 환각 통제 능력, score: 8}
+  - {group: 성능 및 품질, item: AI 답변 품질, criteria: "Golden Question 활용 품질 검증 및 최적화", score: 5}
+  - {group: 성능 및 품질, item: "부하·속도·보안", criteria: "부하 분산, 응답 속도 보장, 권한 통제·가드레일", score: 5}
+  - {group: 사업 관리 및 사후 지원, item: "조직·위험 관리", criteria: 수행 조직의 전문성 및 위험 관리 체계, score: 5}
+  - {group: 사업 관리 및 사후 지원, item: "기술 이전·교육", criteria: "대학 자체 Agent 수정·관리 역량 확보", score: 5}
+  - {group: 사업 관리 및 사후 지원, item: "하자보수·안정화", criteria: "무상/유상 하자보수 및 안정화 지원 체계", score: 5}
+  - {group: 추가 제안, item: 추가 제안, criteria: "구축·운영·유지 등을 위한 추가 제안", score: 5}
+
+chapters:
+# =====================================================================
+- num: Ⅰ
+  title: 전략 및 방법론
+  toc: [사업 이해와 핵심 이슈, 목표 · 추진 전략 · 일정]
+  slides:
+  - kind: visual
+    title: 대학 지식을 정확하게 쓰는 **대학 소유 AI**
+    subtitle: "Private AI 인프라 · 통합 지식DB · Agent 스튜디오 — 대학이 스스로 AI 서비스를 늘려가는 기반"
+    eval: [전략 및 방법론]
+    facts:
+      - {label: 발주기관, value: "인덕대학교\n대학혁신사업단"}
+      - {label: 사업기간, value: "계약일로부터\n10개월"}
+      - {label: 사업금액, value: "13억 원\n(2026 9억 · 2027 4억)"}
+      - {label: 핵심 조건, value: "대학 전용 단독시스템\n365×24 무중단 이중화"}
+
+  - title: 1. 사업 이해와 핵심 이슈
+    headline: "본 사업은 '모델을 들여오는 사업'이 아니라 **대학 지식을 AI가 정확히 쓰게 만드는 사업** — !!정확도와 운영 주도권!!이 성패를 가름"
+    eval: [전략 및 방법론]
+    columns:
+      - w: 1
+        arrow_after: true
+        blocks:
+          - type: panel
+            title: 사업 범위 4대 영역
+            blocks:
+              - type: bullets
+                size: 10.5
+                items:
+                  - {text: "**① Private AI 인프라** — GPU 이중화·모델 서빙·Model Gateway"}
+                  - {text: "**② 통합 지식DB** — HWP·PDF 파싱, Knowledge Catalog, 학사·행정 Data Mart"}
+                  - {text: "**③ Agent 스튜디오·포털** — 시범 Agent 3~5종, 대학 자체 Agent 관리"}
+                  - {text: "**④ 품질·안정화** — Golden Question 평가, 가드레일, 교육·하자보수"}
+      - w: 1.7
+        blocks:
+          - type: table
+            size: 10
+            grow: true
+            header: [핵심 이슈, 원인, 해결 방향]
+            widths: [2.4, 4.4, 5]
+            rows:
+              - [답변 정확도, "규정·지침이 HWP 표·다단·스캔 이미지", "Document Intelligence (표 구조 보존·근거 매핑)"]
+              - [환각, "관련 없는 문서·폐기 규정 참조", "Hybrid Search + Reranking + 효력기간 관리"]
+              - [종속성, "특정 LLM·검색엔진·파서 고정", "OpenAI 호환 API·중립 Metadata"]
+              - [데이터 보호, "학사·인사 데이터 AI 노출 위험", "Semantic View·필드 단위 접근제어"]
+              - [운영 주도권, "사업 후 수행사 의존", "Agent Studio·Knowledge Catalog 자체 운영"]
+
+  - title: 2. 목표 · 추진 전략 · 일정
+    headline: "측정 가능한 품질 목표 아래 **4대 전략**으로 추진 — 2개월 차 인프라 완성, **8개월 차 통합 시험, 10개월 차 완료**"
+    eval: [전략 및 방법론]
+    conclusion: "대학 에이전트 선정 TF와 **3개월 차에 시범 Agent 주제 확정**, Agent별 검증에 TF 참여"
+    columns:
+      - w: 1
+        blocks:
+          - type: cards
+            cols: 2
+            size: 10
+            items:
+              - {title: "① 표준 스택·교체 가능", desc: ["OpenAI 호환 서빙", "모델·검색·파서 교체 검증"]}
+              - {title: "② 문서 이해 품질 우선", desc: ["착수 1개월 파싱 진단", "유형별 청킹 확정"]}
+              - {title: "③ 데이터 최소 노출", desc: ["원천 DB 직접 접근 금지", "View·API·필드 권한"]}
+              - {title: "④ 대학 자립 운영", desc: ["Studio·Catalog 실습", "Agent 수정 역량 인증"]}
+      - w: 1.5
+        blocks:
+          - type: table
+            size: 9.5
+            grow: true
+            header: [단계, "M~M+1", "M+2~3", "M+4~5", "M+6~7", "M+8~9"]
+            widths: [2.6, 1.6, 1.6, 1.6, 1.6, 1.6]
+            rows:
+              - ["착수·파싱 진단", ■, "", "", "", ""]
+              - ["인프라 (GPU·K8s)", ■, ■, "", "", ""]
+              - ["지식DB·연계", ■, ■, ■, "", ""]
+              - ["Agent·Studio", "", ■, ■, ■, ""]
+              - ["품질 (Golden Q)", "", "", ■, ■, ""]
+              - ["시험·이관·완료", "", "", ■, ■, ■]
+
+# =====================================================================
+- num: Ⅱ
+  title: 기술 및 기능 제안
+  toc: ["[인프라] Private AI · 모델 게이트웨이", "[지식DB] 문서 전처리 · 지식 카탈로그", "[AI 서비스] Agent 스튜디오 · 연계"]
+  slides:
+  - title: "1. [인프라] AI 데이터 스퀘어 전체 아키텍처"
+    headline: "인프라 · 모델 · 지식 · Agent · 채널을 **5개 계층으로 분리**하고 표준 API로 연결 — !!어느 계층이든 교체 가능!!"
+    eval: ["[인프라]"]
+    conclusion: "전 계층을 **대학 지정 장소에 설치**, 학생·교직원 개인정보는 외부로 위탁·전송하지 않음"
+    blocks:
+      - type: layers
+        side_w: 5.5
+        layers:
+          - {name: 채널, items: ["AI 사용자 포털 (반응형)", "Agent Studio (관리자)", "LMS·포털 연동"], side: "SSO 자동 로그인"}
+          - {name: Agent, items: ["Agent Runtime (Context Router)", "Tool/API Layer · MCP", "가드레일·권한 통제"], side: "중립 Metadata 정의"}
+          - {name: 지식, items: ["RAG 엔진 (Hybrid Search)", "Knowledge Catalog", "AI Data Mart (Oracle)"], side: "문서 파이프라인"}
+          - {name: 모델, items: ["Model Gateway (OpenAI 호환)", "Private LLM·임베딩·Reranker", "외부 Cloud LLM"], side: "모델 교체·벤치마크"}
+          - {name: 인프라, items: ["GPU 서버 이중화", "Kubernetes", "스토리지·백업", "APM·모니터링"], side: "365×24 무중단"}
+
+  - title: "2. [인프라] GPU 이중화 · Model Gateway"
+    headline: "워크로드별 자원 산정과 **GPU 서버 2대 이상 + 쿠버네티스**로 무중단, **하나의 OpenAI 호환 API**로 모델 종속 없이 운영"
+    eval: ["[인프라]"]
+    columns:
+      - w: 1
+        blocks:
+          - type: panel
+            title: 인프라 구성 (안)
+            blocks:
+              - type: table
+                size: 10
+                grow: true
+                header: [구분, 구성]
+                widths: [1.4, 3]
+                rows:
+                  - [GPU 서버, "【GPU 모델·장수】 × 2대 이상"]
+                  - [애플리케이션, "【사양】 × 2대 이상"]
+                  - [DB, "Oracle Active-Standby, 벡터·검색 클러스터"]
+                  - [플랫폼, "Kubernetes, GPU 스케줄링"]
+                  - [모니터링, "GPU 메트릭 + 대학 APM(와탭) 연동"]
+      - w: 1.2
+        blocks:
+          - type: flow
+            size: 10
+            steps:
+              - {title: 요청, desc: "Agent·포털"}
+              - {title: 정책 적용, desc: "권한·마스킹·가드레일"}
+              - {title: 라우팅, desc: "Private / Cloud"}
+              - {title: 기록, desc: "응답·비용 로그"}
+          - type: table
+            size: 10
+            grow: true
+            header: [기능, Model Gateway 구현 방안]
+            widths: [1.6, 4.6]
+            rows:
+              - [표준 인터페이스, "OpenAI 호환 API — 모델 교체 시 Agent 정의 변경 최소화"]
+              - [Private 모델, "한국어 검증 오픈 가중치 모델 【PoC 후 선정】"]
+              - [Cloud 연동, "개인정보 자동 마스킹, 대학 승인 Agent만 허용"]
+              - [Benchmark, "같은 Agent·Golden Q로 **정확도·지연·비용 비교**"]
+              - [사후 지원, "안정화 후 2년간 LLM 모델 추가·업데이트"]
+
+  - title: "3. [지식DB] HWP · PDF · 스캔 문서 Document Intelligence"
+    headline: "대학 규정·지침의 **HWP 표·다단·스캔 이미지**를 구조 그대로 변환하고, !!추출 결과마다 원문 위치!!를 남김"
+    eval: ["[지식DB]", 파싱 정확도 검증]
+    conclusion: "**HWP 원본을 직접 해석**해 PDF 변환 과정의 표 깨짐을 방지, 변환 불가 시 PDF 경로로 우회"
+    blocks:
+      - type: flow
+        size: 10.5
+        steps:
+          - {title: ① 유형 판별, desc: "HWP·PDF·스캔·Office 경로 선택"}
+          - {title: ② 구조 분석, desc: "제목·본문·표·그림, 다단·각주 분리"}
+          - {title: ③ 표 추출, desc: "병합 셀 보존 → Markdown·JSON"}
+          - {title: ④ OCR, desc: "한글 OCR, 신뢰도 점수 기록"}
+          - {title: ⑤ 검증, desc: "원문 쪽·좌표 매핑, 저신뢰 검수 큐"}
+        h: 2.8
+      - type: table
+        size: 10.5
+        grow: true
+        header: [문서 유형, 청킹 전략]
+        widths: [2, 8]
+        rows:
+          - ["규정·학칙", "조·항·호 단위, 상위 조문 제목 메타데이터 상속, 효력일 부여"]
+          - [매뉴얼·지침, "제목 계층 단위, 절차 목록은 분할하지 않음"]
+          - [표, "표 단위 통째 보존 + 행 단위 요약 청크 병행"]
+          - ["PPT·Excel", "슬라이드·시트 단위, 시트명·열 이름 메타데이터"]
+          - [파서 엔진, "【자사 개발 / 상용·오픈소스 조합 확정】 — 엔진 교체 시에도 파이프라인 인터페이스 유지"]
+
+  - title: "4. [지식DB] RAG 검색 품질 · Knowledge Catalog"
+    headline: "**키워드 + 벡터 + Reranking** 검색으로 근거를 찾고, 모든 지식을 **출처·버전·효력일·권한**과 함께 관리해 !!폐기 규정으로 답하지 않음!!"
+    eval: ["[지식DB]"]
+    columns:
+      - w: 1
+        blocks:
+          - type: panel
+            title: 검색 품질
+            blocks:
+              - type: bullets
+                size: 10.5
+                items:
+                  - {text: "(Hybrid Search) BM25 + 벡터 결합, 독립 API (엔진 교체 가능)"}
+                  - {text: "(Re-ranking) Cross-encoder로 질문-문서 대조"}
+                  - {text: "(환각 차단) 임계 미만 문서 제외, 근거 없으면 **'확인 불가'**"}
+                  - {text: "(자동 갱신) 자료 추가·삭제 시 증분 재색인"}
+                  - {text: "(정형 데이터) 벡터화하지 않고 Data Mart SQL·API 조회"}
+                  - {text: "(Golden Data) 우수 답변 사례를 프롬프트 예시로 등록·관리"}
+      - w: 1
+        blocks:
+          - type: panel
+            title: Knowledge Catalog · 거버넌스
+            blocks:
+              - type: table
+                size: 9.5
+                header: [항목, 내용]
+                widths: [1.4, 3.2]
+                rows:
+                  - [식별·출처, "지식 ID, 원문, 소유부서"]
+                  - [버전·효력, "효력 시작·종료일, 이전 버전"]
+                  - [AI 접근, "SQL / API / Rule / RAG / Direct"]
+                  - [권한, "지식영역·그룹별 열람 권한"]
+              - type: flow
+                size: 9.5
+                grow: true
+                steps:
+                  - {title: 등록, desc: "부서 담당"}
+                  - {title: 검토, desc: "소유부서"}
+                  - {title: 게시, desc: "자동 색인"}
+                  - {title: 폐기, desc: "검색 제외"}
+
+  - title: "5. [지식DB] 학사 · 행정 AI Data Mart 및 연계"
+    headline: "학사·행정 데이터는 **목적별 Semantic View/API**로만 제공 — 원천 DB 무부하, !!필드 단위 접근 통제!!"
+    eval: ["[지식DB]", "[AI 서비스]"]
+    conclusion: "유지보수 미체결 레거시는 **원 개발사 협조 비용을 사전 반영**하고 표준 API로 연계"
+    columns:
+      - w: 1.2
+        blocks:
+          - type: layers
+            side_w: 3.4
+            h: 1.15
+            layers:
+              - {name: 원천, items: ["차세대종합정보", "LMS (마이아이)", "포털·홈페이지", "외부 공공 API"], side: "직접 접근 금지"}
+              - {name: 연계, items: ["API 솔루션", "배치 수집 (CDC)", "연계 이력"], side: "수집 현황 관리"}
+              - {name: Data Mart, items: ["Oracle 통합 DB", "Semantic View", "Metadata"], side: "AI 친화 추상화"}
+              - {name: 제공, items: ["SQL Tool·API", "필드 접근제어", "마스킹"], side: "Agent 호출"}
+      - w: 1
+        blocks:
+          - type: table
+            size: 9.5
+            grow: true
+            header: [연계 대상, 방안]
+            widths: [1.8, 3.4]
+            rows:
+              - [차세대종합정보, "학사·행정 View → Data Mart 적재"]
+              - ["SSO·포털·홈페이지", "SSO 자동 로그인, 포털 링크·위젯"]
+              - ["LMS (마이아이)", "학습활동 데이터 API 연계"]
+              - [외부 공공데이터, "국가법령정보 등 API 수집·갱신"]
+
+  - title: "6. [AI 서비스] Agent Runtime · Studio"
+    headline: "Agent를 **모델·지식·Tool·권한·프롬프트·워크플로의 중립 Metadata**로 정의 — 대학 관리자가 !!직접 만들고 고치고 되돌림!!"
+    eval: ["[AI 서비스]"]
+    blocks:
+      - type: flow
+        size: 10.5
+        steps:
+          - {title: ① 템플릿 선택, desc: "문서형·데이터형·복합형"}
+          - {title: ② 구성, desc: "모델·지식·Tool·권한 지정"}
+          - {title: ③ 프롬프트, desc: "지시문·Golden Data 예시"}
+          - {title: ④ 시험, desc: "Golden Q 자동 평가"}
+          - {title: ⑤ 배포·롤백, desc: "버전 게시·1클릭 복원"}
+      - type: cards
+        cols: 4
+        size: 10
+        h: 2.1
+        items:
+          - {title: Context Router, desc: ["질의 특성별 SQL·API·Rule·RAG 선택·조합"]}
+          - {title: 중립 정의, desc: ["JSON Metadata 저장", "런타임 교체 시 재사용"]}
+          - {title: Tool Registry, desc: ["학사·LMS·행정 Tool (MCP)", "고위험 작업 승인 통제"]}
+          - {title: 간이 Agent, desc: ["교직원이 지식 범위·지시문만으로 설계"]}
+
+  - title: "7. [AI 서비스] 시범 Agent · AI 포털"
+    headline: "서로 다른 데이터 유형을 검증하는 **시범 Agent 5종(안)**과, **3가지 응답 모드**를 자동 선택하는 반응형 포털을 제공"
+    eval: ["[AI 서비스]"]
+    conclusion: "시범 Agent는 **대학 에이전트 선정 TF 결과로 최종 확정**, Tool 소스·명세는 대학에 귀속"
+    columns:
+      - w: 1.5
+        blocks:
+          - type: table
+            size: 9.5
+            grow: true
+            header: [유형, Agent, 데이터·실행 방식, 검증 포인트]
+            widths: [1.3, 2.2, 2.6, 2.2]
+            rows:
+              - [문서형, "학칙·규정 상담", "RAG (규정 지식)", "조문 근거·효력일"]
+              - [데이터형, "학사 현황 조회", "Data Mart SQL Tool", "권한별 필드 통제"]
+              - [복합형, "졸업요건 점검", "SQL + RAG + Rule", "다단계 추론"]
+              - [공유형, "부서 공유 Agent", "부서 지식·문서 요약", "지식영역 권한"]
+              - [분석형, "강의평가 감정 분석", "LLM 분류 (배치)", "점수 일관성"]
+      - w: 1
+        blocks:
+          - type: cards
+            cols: 1
+            size: 10
+            items:
+              - {title: 직접 응답, desc: ["내부 LLM 즉시 응답"]}
+              - {title: 지식 참조, desc: ["RAG 근거 인용·원문 쪽 링크"]}
+              - {title: 데이터 조회, desc: ["Data Mart 권한 범위 결과"]}
+
+# =====================================================================
+- num: Ⅲ
+  title: PoC 기술 시연
+  toc: [파싱 정확도 검증, RAG 품질 검증]
+  slides:
+  - title: 1. 파싱 정확도 검증 시연
+    headline: "현장 샘플 문서를 **사전 조정 없이** 그대로 넣고, 표·OCR 추출 결과를 !!원문과 나란히!! 보여 완결성을 입증"
+    eval: [파싱 정확도 검증]
+    conclusion: "공개 대학 규정·학칙 HWP·PDF **【20종】 사전 검증 완료**, 네트워크 미제공 대비 로컬 실행 환경 준비"
+    blocks:
+      - type: flow
+        size: 10.5
+        steps:
+          - {title: 문서 수령, desc: "현장 샘플 (표 포함)"}
+          - {title: 업로드, desc: "포털 업로드 1회"}
+          - {title: 자동 파싱, desc: "유형 판별·표·OCR"}
+          - {title: 나란히 비교, desc: "원문 ↔ 추출 결과"}
+          - {title: 근거 확인, desc: "셀·쪽 위치 매핑"}
+        h: 2.6
+      - type: table
+        size: 10.5
+        grow: true
+        header: [시연 항목, 확인 내용, 자체 목표]
+        widths: [2, 5, 3]
+        rows:
+          - [본문 텍스트, "글자 누락·순서 뒤바뀜", "누락 0건"]
+          - [표 구조, "병합 셀·머리행 유지, 행·열 수 일치", "행·열 100% 일치"]
+          - [다단·각주, "읽기 순서 복원", "순서 오류 0건"]
+          - [스캔·이미지, "OCR 정확도·신뢰도 표시", "【PoC 후 확정】"]
+
+  - title: 2. RAG 품질 검증 시연
+    headline: "샘플 문서 질문에 **근거 조문·쪽과 함께 답하고**, 문서에 없는 질문에는 !!'확인할 수 없음'!!으로 답하는 환각 통제를 시연"
+    eval: [RAG 품질 검증]
+    conclusion: "시연 결과를 **정답 정확도·Groundedness·Source 정확성** 지표로 화면에 표시 — 시연이 곧 운영 품질 기준"
+    columns:
+      - w: 1.3
+        blocks:
+          - type: table
+            size: 10
+            grow: true
+            header: [질문 유형, 예시, 확인 포인트]
+            widths: [1.6, 3.2, 2.6]
+            rows:
+              - [사실 확인, "○○ 신청 기한은?", "정답 + 근거 조문·쪽"]
+              - [표 기반, "표의 특정 행·열 값", "표 셀 정확 인용"]
+              - [다중 근거, "두 조항 종합 질문", "근거 2개 이상"]
+              - [함정 질문, "문서에 없는 내용", "'확인할 수 없음'"]
+              - [변형 질문, "같은 의미 다른 표현", "답변 일관성"]
+      - w: 1
+        blocks:
+          - type: panel
+            title: 환각 통제 3중 장치
+            blocks:
+              - type: bullets
+                size: 10.5
+                items:
+                  - {text: "**① 관련성 임계** — Reranker 점수 미만 문서 근거 제외"}
+                  - {text: "**② 근거 강제** — 문장마다 출처 표시, 근거 없는 생성 금지"}
+                  - {text: "**③ 자기 검증** — Groundedness 미달 시 재생성 또는 '확인 불가'"}
+
+# =====================================================================
+- num: Ⅳ
+  title: 성능 및 품질
+  toc: [AI 답변 품질 검증 및 최적화, 부하 분산 · 응답 속도 · 보안]
+  slides:
+  - title: 1. Golden Question 기반 품질 평가 · 개선
+    headline: "업무별 **Golden Question Set**으로 8개 품질 지표를 자동·수동 평가하고, 결과를 !!지식·프롬프트·모델 개선!!으로 되돌림"
+    eval: [AI 답변 품질]
+    columns:
+      - w: 1.4
+        blocks:
+          - type: table
+            size: 9.5
+            grow: true
+            header: [지표, 측정 방법, "목표 (안)"]
+            widths: [2.2, 3.6, 1.8]
+            rows:
+              - [정답 정확도, "Golden Q 정답 대비 일치", "【90%】↑"]
+              - [Groundedness, "답변 문장 근거 지지 비율", "【95%】↑"]
+              - [Source 정확성, "인용 출처·쪽 정확도", "【95%】↑"]
+              - [권한 정확성, "권한 밖 데이터 노출", "0건"]
+              - [Tool 실행, "올바른 Tool·파라미터", "【90%】↑"]
+              - [Hallucination, "근거 없는 주장 비율", "【2%】↓"]
+              - [응답 성능, "첫 토큰·전체 응답", "3초 내 표시"]
+              - [비용, "질의당 토큰·GPU", "추이 관리"]
+      - w: 1
+        blocks:
+          - type: flow
+            size: 10
+            grow: true
+            steps:
+              - {title: Golden Q, desc: "부서 TF와 업무별 구성"}
+              - {title: 평가, desc: "자동·수동 정기 평가"}
+              - {title: 원인 분석, desc: "파싱·검색·프롬프트·모델"}
+              - {title: 개선, desc: "지식 보완·프롬프트·LoRA"}
+
+  - title: 2. 부하 분산 · 응답 속도 · 보안
+    headline: "쿠버네티스 수평 확장과 스트리밍 응답으로 **동시 1,400명 · 3초 표시**를 보장하고, !!권한 통제와 가드레일!!로 데이터 노출 차단"
+    eval: ["부하·속도·보안"]
+    columns:
+      - w: 1
+        blocks:
+          - type: table
+            size: 10.5
+            grow: true
+            header: [성능 요구, 확보 방안]
+            widths: [1.8, 4.6]
+            rows:
+              - ["동시 1,400명", "웹·API 오토스케일, L4 부하 분산, 무상태 설계"]
+              - ["웹 3초 표시", "정적 자원 캐시, **LLM 스트리밍**으로 첫 토큰 즉시 표시"]
+              - [오류 응답, "입력 검증 즉시 표시 (3초 이내)"]
+              - [부하 시험, "1,400 동시 세션 시나리오 → 튜닝·재시험"]
+              - [단계별 시험, "단위 → 통합 → 부하 → 인수 (TF·감리 확인)"]
+      - w: 1
+        blocks:
+          - type: table
+            size: 10.5
+            grow: true
+            header: [보안 영역, 가드레일 방안]
+            widths: [1.8, 4.6]
+            rows:
+              - [권한 통제, "SSO + 역할 기반, **검색 단계 권한 필터**"]
+              - [입력, "프롬프트 인젝션·금칙어·개인정보 탐지"]
+              - [출력, "개인정보 마스킹, 권한 밖 정보 차단"]
+              - [고위험 Tool, "승인 후 실행, 실행 이력 감사"]
+              - [웹 보안, "시큐어코딩, 웹 취약점·접근성 점검"]
+
+# =====================================================================
+- num: Ⅴ
+  title: 사업 관리 및 사후 지원
+  toc: [수행 조직 및 위험 관리, 기술 이전 및 교육, 하자보수 · 안정화, 추가 제안]
+  slides:
+  - title: 1. 수행 조직 및 위험 관리
+    headline: "PM 직할 **인프라 · 지식DB · Agent · UX · 품질 5개 파트** 대학 상주, 사업 고유 위험 6건을 !!착수 전 식별!!하여 주간 관리"
+    eval: ["조직·위험 관리"]
+    columns:
+      - w: 1
+        blocks:
+          - type: layers
+            side_w: 2.6
+            h: 1.3
+            layers:
+              - {name: 대학, items: [대학혁신사업단, 전산센터 TF, 선정 TF, 감리], side: "총괄·검증"}
+              - {name: 사업관리, items: ["PM", "QA", "보안관리"], side: "대학 상주"}
+              - {name: 수행 파트, items: ["인프라", "지식DB", "Agent", "UX", "연계"], side: "분석·개발·시험"}
+          - type: kpi
+            h: 3
+            items:
+              - {value: "117명", label: 기술인력}
+              - {value: "22명", label: 특급 기술자}
+              - {value: "16년", label: 2010년 설립}
+      - w: 1.2
+        blocks:
+          - type: table
+            size: 9.5
+            grow: true
+            header: [위험, 영향, 예방 · 대응]
+            widths: [2.2, 0.9, 4.6]
+            rows:
+              - [GPU 납기 지연, 상, "계약 즉시 발주 · 임시 GPU로 개발 병행"]
+              - [레거시 연계 지연, 상, "원 개발사 사전 접촉 · 배치 연계 우선"]
+              - [문서 파싱 품질, 상, "착수 1개월 진단 · 유형별 규칙 추가"]
+              - [요구사항 확대, 중, "TF 합의 기준선 · 변경관리"]
+              - [모델 성능 한계, 중, "Benchmark 선정 · Cloud 혼용·LoRA"]
+              - [2차년도 범위, 중, "연차별 산출물 명확화 · 1차년도 독립 운영"]
+
+  - title: 2. 기술 이전 및 교육
+    headline: "대상별 교육과 **Agent 직접 수정 실습·인증 과제**로, 사업 종료 후 !!대학이 스스로 Agent와 지식을 관리!!"
+    eval: ["기술 이전·교육"]
+    columns:
+      - w: 1.2
+        blocks:
+          - type: table
+            size: 10
+            grow: true
+            header: [대상, 교육 내용, 방식]
+            widths: [1.6, 4.8, 1.6]
+            rows:
+              - [관리자, "Agent 생성·수정·롤백, 지식 등록·폐기, 권한 관리", "실습 + 인증"]
+              - [운영자, "GPU·K8s·모델 서빙 모니터링, 백업·장애 대응", 실습]
+              - [사용자, "응답 모드·근거 확인·피드백", "설명회·영상"]
+              - [유지관리, "소스·배포·모델 교체·평가 스크립트", 기술이전]
+      - w: 1
+        blocks:
+          - type: panel
+            title: 이관 산출물 — 교체 가능성 확보
+            blocks:
+              - type: bullets
+                size: 10.5
+                items:
+                  - {text: "(설계) Architecture, Data Mart Schema·Mapping"}
+                  - {text: "(Agent·Tool) Agent Definition·Prompt·Tool Registry, API/MCP 명세·소스"}
+                  - {text: "(품질) Golden Question·정답·평가 Script"}
+                  - {text: "(운영) 배포 Script, 운영·장애 매뉴얼, **제품·모델 교체 절차**"}
+
+  - title: 3. 하자보수 · 안정화
+    headline: "안정화 후 **SW 2년 · HW 3년** 무상 하자보수와 **2년간 LLM 모델 추가·업데이트**, 유상 유지보수 요율 확약"
+    eval: ["하자보수·안정화"]
+    conclusion: "결함 발견 시 **24시간 이내 조치 착수**, 단종 3개월 전 서면 통보·예비부품 확보"
+    blocks:
+      - type: cards
+        cols: 4
+        size: 10
+        items:
+          - {title: 안정화, desc: ["오픈 후 【 】개월 상주", "품질 지표 모니터링·튜닝"]}
+          - {title: 무상 하자보수, desc: ["SW 2년 이상 (공급·개발 전체)", "HW 3년 이상 (제조사 연계)"]}
+          - {title: LLM 지원, desc: ["안정화 후 2년간", "모델 추가·마이너 업데이트"]}
+          - {title: 유상 유지보수, desc: ["HW·IaaS 제외 전 품목", "요율 확약서 【요율】"]}
+        h: 4.2
+      - type: flow
+        size: 10.5
+        grow: true
+        steps:
+          - {title: 접수, desc: "단일 창구"}
+          - {title: 분류, desc: "HW·SW·모델·데이터"}
+          - {title: 조치, desc: "원격·현장·제조사"}
+          - {title: 보고, desc: "처리 결과·재발방지"}
+
+  - title: 4. 추가 제안
+    headline: "추가 비용 없이 대학 AI 활용을 넓히고 운영 비용을 줄이는 **4가지 추가 제안**을 함께 수행"
+    eval: [추가 제안]
+    conclusion: "AI 데이터 스퀘어는 **대학이 소유하고, 대학이 운영하며, 대학이 확장하는** AI 기반"
+    blocks:
+      - type: cards
+        cols: 4
+        size: 10.5
+        items:
+          - {title: ① 학생 서비스 로드맵, desc: ["맞춤형 상담·전과·전공 탐색 Agent 설계안", "2027년 이후 확장 계획"]}
+          - {title: ② AI 활용 가이드북, desc: ["교직원 업무별 활용 사례집", "AI 윤리 원칙 교육 자료"]}
+          - {title: ③ 비용 최적화 리포트, desc: ["Private/Cloud 모델 비용 비교", "GPU 사용률 기반 증설 계획"]}
+          - {title: ④ 문서 표준화 가이드, desc: ["AI가 잘 읽는 규정·서식 지침", "부서 문서 품질 개선"]}
+        h: 4
+      - type: table
+        size: 10.5
+        grow: true
+        header: [제안 전제 · 협의 사항, 내용]
+        widths: [2.4, 7.6]
+        rows:
+          - [레거시 연계 비용, "유지보수 미체결 시스템의 원 개발사 협조 비용 범위 협의"]
+          - [하자보수 기간, "기본조건(2년 이상)과 사업지원 요구사항(12개월 이상) 중 2년 기준 적용"]
+          - [연차별 범위, "1차년도·2차년도 기성 범위와 산출물 착수 시 확정"]
+
+closing:
+  title: 감사합니다
+  message: 대학 지식을 정확하게 쓰는 대학 소유 AI — 주식회사 에이치나인

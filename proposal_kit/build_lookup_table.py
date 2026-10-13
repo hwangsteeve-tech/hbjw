@@ -73,7 +73,7 @@ def _title(h3):
 
 def build_rows(content, spec):
     slides = slide_pages(content)
-    reqs = spec["requirements"]
+    reqs = spec.get("requirements") or {}
     rows = []
     for ev in spec["evaluation"]:
         item = f"{ev['item']}\n({ev['score']}점)" if ev["score"] != "-" else f"{ev['item']}\n(-)"
@@ -86,8 +86,10 @@ def build_rows(content, spec):
                              _pages_text([s["page"] for s in hit]),
                              "\n".join(dict.fromkeys(_title(s["h3"]) for s in hit)) or "-", ""])
             else:
+                h3s = r.get("h3") or []  # h3 번호 접두어로 특정 슬라이드만 지정 (예: ["2.1.1", "2.2.1"])
                 hit = [s for s in slides if s["chapter"] == r["chapter"]
-                       and (not r.get("header") or s["header"] == r["header"])]
+                       and (not r.get("header") or s["header"] == r["header"])
+                       and (not h3s or any(s["h3"].startswith(str(h)) for h in h3s))]
                 rows.append([item, r.get("label", "-"), r["rfp_page"], r["rfp_text"],
                              _pages_text([s["page"] for s in hit]),
                              "\n".join(dict.fromkeys(_title(s["h3"]) for s in hit)) or "-", ""])
@@ -165,7 +167,7 @@ def write_xlsx(rows, spec, out: Path):
     wb = Workbook()
     ws = wb.active
     ws.title = "조견표"
-    widths = [13, 10, 7, 44, 9, 40, 8]
+    widths = [13, 10, 9, 44, 9, 40, 8]
     for i, w in enumerate(widths):
         ws.column_dimensions["ABCDEFG"[i]].width = w
 
@@ -180,7 +182,7 @@ def write_xlsx(rows, spec, out: Path):
     ws["A2"].alignment = Alignment(horizontal="right", vertical="center")
 
     head = [("A3:A4", "평가항목\n(배점)"), ("B3:B4", "요구사항\n구분"), ("C3:D3", "제안요청서 요구사항"),
-            ("C4", "쪽수"), ("D4", "요구사항명 및\n주요내용"), ("E3:F3", "제안사항"), ("E4", "쪽수"),
+            ("C4", spec.get("rfp_ref_header", "쪽수")), ("D4", "요구사항명 및\n주요내용"), ("E3:F3", "제안사항"), ("E4", "쪽수"),
             ("F4", "주요내용"), ("G3:G4", "비고")]
     for rng, text in head:
         if ":" in rng:

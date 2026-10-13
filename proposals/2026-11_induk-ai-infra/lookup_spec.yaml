@@ -1,0 +1,83 @@
+# 인덕대 RFP에는 요구사항 고유번호·쪽 번호가 없어 RFP 절 번호(예: Ⅳ.2.가)로 위치를 표기한다.
+proposer: 주식회사 에이치나인
+title: 제안요청서 대비 제안사항 조견표 (대학 AI 인프라 기반 구축)
+rfp_ref_header: RFP 위치
+evaluation:
+- item: "Ⅰ-1. 경영 상태\n(신용평가등급)"
+  score: 5
+  rows:
+  - {label: 정량, rfp_page: Ⅵ.7, rfp_text: "신용평가등급 (공고일 기준 1개월 이내 발급 신용등급확인서)", chapter: Ⅵ, header: 1. 일반현황}
+- item: "Ⅰ-2. 유사 사업 수행 실적"
+  score: 5
+  rows:
+  - {label: 정량, rfp_page: Ⅵ.7, rfp_text: "최근 3년 3억 원 이상 대학·공공기관 AI(RAG·Agent) 사업 실적건수", chapter: Ⅵ, header: 2. 조직 및 수행 실적}
+- item: "Ⅰ-3. 연관 사업 수행 실적"
+  score: 5
+  rows:
+  - {label: 정량, rfp_page: Ⅵ.7, rfp_text: "최근 3년 3억 원 이상 학사시스템(학적·수강·성적) 단일용역 실적건수", chapter: Ⅵ, header: 2. 조직 및 수행 실적}
+- item: "Ⅱ-1. 전략 및 방법론"
+  score: 5
+  rows:
+  - {label: 사업개요, rfp_page: Ⅰ, rfp_text: "추진배경 및 필요성, 사업 범위, 기대성과", chapter: Ⅰ, header: 1. 사업 이해}
+  - {label: 대학현황, rfp_page: Ⅱ, rfp_text: "INDUK VISION2030, 혁신지원사업, 정보화 현황", chapter: Ⅰ, header: 2. 목표 및 추진 전략}
+  - {label: 추진계획, rfp_page: Ⅲ.2, rfp_text: "추진 일정 (10개월, 단계별)", chapter: Ⅰ, header: 3. 추진 일정}
+- item: "Ⅱ-2. [인프라]\nPrivate AI·LLM 게이트웨이"
+  score: 5
+  rows:
+  - {label: 기능, rfp_page: Ⅳ.2.가.2), rfp_text: "Private AI 인프라 구축\n- GPU 서버, 워크로드별 성능 산정, OpenAI 호환 API, 표준 스택, APM 모니터링", chapter: Ⅱ, h3: ["1.1.1", "1.2.1"]}
+  - {label: 기능, rfp_page: Ⅳ.2.가.2), rfp_text: "모델 게이트웨이 구축\n- Private/Cloud 혼용, 모델 교체 시 Agent 최소 수정, Benchmark, 공통 프롬프트 관리", chapter: Ⅱ, h3: ["1.3.1"]}
+  - {label: 기능, rfp_page: Ⅳ.2.가.2), rfp_text: "모니터링 및 로깅\n- 이용 현황, 프롬프트·응답·Tool 호출 이력", chapter: Ⅱ, h3: ["1.2.1", "3.3.1"]}
+- item: "Ⅱ-2. [지식DB]\n문서 전처리·지식 카탈로그"
+  score: 10
+  rows:
+  - {label: 기능, rfp_page: Ⅳ.2.가.2), rfp_text: "Document Intelligence 구축\n- HWP·PDF·스캔 문서 구조 인식, 표 추출, OCR", chapter: Ⅱ, h3: ["2.1.1"]}
+  - {label: 기능, rfp_page: Ⅳ.2.가.2), rfp_text: "RAG 전처리 파이프라인 / Retrieval·RAG 서비스 / 검색품질 향상(Re-ranking)", chapter: Ⅱ, h3: ["2.2.1"]}
+  - {label: 기능, rfp_page: Ⅳ.2.가.2), rfp_text: "전사 공통 Knowledge DB / Knowledge Catalog / 지식 거버넌스 및 버전관리", chapter: Ⅱ, h3: ["2.3.1"]}
+  - {label: 기능, rfp_page: Ⅳ.2.가.2), rfp_text: "AI Data Mart 구축 / 데이터 연계 및 수집", chapter: Ⅱ, h3: ["2.4.1"]}
+  - {label: 데이터, rfp_page: Ⅳ.2.나.3), rfp_text: "데이터베이스 (데이터 요구사항)", chapter: Ⅱ, h3: ["2.4.1"]}
+- item: "Ⅱ-2. [AI 서비스]\nAgent 스튜디오·연계"
+  score: 10
+  rows:
+  - {label: 기능, rfp_page: Ⅳ.2.가.2), rfp_text: "Agent Runtime 및 Studio 구축", chapter: Ⅱ, h3: ["3.1.1"]}
+  - {label: 기능, rfp_page: Ⅳ.2.가.2), rfp_text: "Tool / API Layer 구축 / 시범 Agent 구축", chapter: Ⅱ, h3: ["3.2.1"]}
+  - {label: 기능, rfp_page: Ⅳ.2.가.2), rfp_text: "다중 응답 모드 제공 / 접근제어 및 IAM 연동", chapter: Ⅱ, h3: ["3.3.1"]}
+  - {label: 인터페이스, rfp_page: Ⅳ.2.나.2), rfp_text: "웹 표준 및 호환성 준수", chapter: Ⅱ, h3: ["3.3.1"]}
+- item: "Ⅱ-3. PoC\n[파싱 정확도 검증]"
+  score: 7
+  rows:
+  - {label: PoC, rfp_page: Ⅵ.7, rfp_text: "현장 제공 샘플 문서(표 포함)의 텍스트 추출 완결성", chapter: Ⅲ, header: 1. 파싱 정확도 검증}
+- item: "Ⅱ-3. PoC\n[RAG 품질 검증]"
+  score: 8
+  rows:
+  - {label: PoC, rfp_page: Ⅵ.7, rfp_text: "샘플 문서 기반 질의응답 정확도 및 환각 통제 능력", chapter: Ⅲ, header: 2. RAG 품질 검증}
+- item: "Ⅱ-4. AI 답변 품질 검증·최적화"
+  score: 5
+  rows:
+  - {label: 기능, rfp_page: Ⅳ.2.가.2), rfp_text: "AI 품질 평가체계 구축 (Golden Question 등)", chapter: Ⅳ, header: 1. AI 답변 품질 검증}
+  - {label: 품질, rfp_page: Ⅳ.2.나.6), rfp_text: "품질관리 일반사항 (신뢰성·하자보수성·보안성·사용성)", chapter: Ⅳ, header: 1. AI 답변 품질 검증}
+- item: "Ⅱ-4. 부하 분산·응답 속도·보안"
+  score: 5
+  rows:
+  - {label: 성능, rfp_page: Ⅳ.2.나.1), rfp_text: "성능요건 일반 / 웹 페이지 디스플레이시간 / 오류응답시간 / 동시 사용자 접속 수", chapter: Ⅳ, header: 2. 부하 분산 · 응답 속도 · 보안}
+  - {label: 테스트, rfp_page: Ⅳ.2.나.4), rfp_text: "부하테스트 요구사항", chapter: Ⅳ, header: 2. 부하 분산 · 응답 속도 · 보안}
+  - {label: 보안, rfp_page: Ⅳ.2.나.5), rfp_text: "보안 요건 (권한 통제, 가드레일, 웹 취약점 점검)", chapter: Ⅳ, header: 2. 부하 분산 · 응답 속도 · 보안}
+- item: "Ⅱ-5. 수행 조직 전문성·위험 관리"
+  score: 5
+  rows:
+  - {label: 사업관리, rfp_page: Ⅳ.2.나.8), rfp_text: "사업수행계획서 작성·수립 / 핵심인력 관리 / 일정 관리 / 정기·수시 보고 / 검수 및 검사", chapter: Ⅴ, h3: ["1.1.1"]}
+  - {label: 사업관리, rfp_page: Ⅳ.2.나.8), rfp_text: "요구사항 관리 / 위험관리 방안", chapter: Ⅴ, h3: ["1.2.1"]}
+  - {label: 테스트, rfp_page: Ⅳ.2.나.4), rfp_text: "테스트 일반 / 단위·통합·인수 테스트", chapter: Ⅴ, h3: ["1.1.1"]}
+  - {label: 보안, rfp_page: "Ⅴ, Ⅳ.2.나.8)", rfp_text: "정보보안 준수: 보안서약, 정보보안 계획, 외부PC 반입·반출, 침해사고 대책, 자료 보안", chapter: Ⅴ, header: 4. 정보보안 대책}
+- item: "Ⅱ-5. 기술 이전 및 교육"
+  score: 5
+  rows:
+  - {label: 사업지원, rfp_page: Ⅳ.2.나.9), rfp_text: "교육 일반사항 / 기술이전 방안 (대학 자체 Agent 수정·관리 역량)", chapter: Ⅴ, header: 2. 기술 이전 및 교육}
+  - {label: 기능, rfp_page: Ⅳ.2.가.2), rfp_text: "교체 가능성 및 운영주도권 확보 / 필수 이관 산출물 제공", chapter: Ⅴ, header: 2. 기술 이전 및 교육}
+- item: "Ⅱ-5. 하자보수 및 안정화"
+  score: 5
+  rows:
+  - {label: 사업지원, rfp_page: Ⅳ.2.나.9), rfp_text: "하자보수 일반 / 안정화 지원 활동 / 정기 보고회", chapter: Ⅴ, header: 3. 하자보수 및 안정화}
+- item: "Ⅱ-6. 추가 제안"
+  score: 5
+  rows:
+  - {label: 추가, rfp_page: Ⅵ.7, rfp_text: "본 사업의 구축·운영·유지 등을 위한 추가 제안", chapter: Ⅶ, header: 1. 추가 제안}
