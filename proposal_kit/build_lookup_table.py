@@ -33,17 +33,25 @@ def slide_pages(content: dict):
         page += max(1, -(-n_ids // 44))
     page += 1  # 목차
     out = []
+    by_chapter = content.get("page_numbering") == "chapter"
     for ch in content["chapters"]:
         page += 1  # 간지
-        for spec in ch.get("slides", []):
+        for k, spec in enumerate(ch.get("slides", []), start=1):
             page += 1
             ids = [r for r in re.split(r"[,\s]+", spec.get("req") or "") if r]
-            out.append({"chapter": ch["num"], "header": spec.get("header", ""), "h3": spec.get("h3") or spec.get("h2", ""),
-                        "ids": ids, "page": page})
+            out.append({"chapter": ch["num"], "chapter_title": ch.get("title", ""), "header": spec.get("header", ""),
+                        "h3": spec.get("h3") or spec.get("h2", ""), "ids": ids,
+                        "page": (ch["num"], k) if by_chapter else page})
     return out
 
 
 def _pages_text(pages):
+    if pages and isinstance(pages[0], tuple):  # 장별 쪽번호 (장, 쪽)
+        out = []
+        for ch in dict.fromkeys(c for c, _ in pages):
+            nums = sorted({n for c, n in pages if c == ch})
+            out.append(f"{ch}-" + _pages_text(nums).replace(", ", f", {ch}-").replace("~", f"~{ch}-"))
+        return ", ".join(out)
     pages = sorted(set(pages))
     if not pages:
         return "-"
@@ -84,6 +92,63 @@ def build_rows(content, spec):
                              _pages_text([s["page"] for s in hit]),
                              "\n".join(dict.fromkeys(_title(s["h3"]) for s in hit)) or "-", ""])
     return rows
+
+
+def build_compliance_rows(content, spec):
+    """요구사항 고유번호 · 명칭 · 제안서 목차 · 쪽수 · 준수 여부 형식."""
+    slides = slide_pages(content)
+    rows = []
+    for rid, q in spec["requirements"].items():
+        hit = [s for s in slides if rid in s["ids"]]
+        toc = "\n".join(dict.fromkeys(f"{s['chapter']}. {s['chapter_title']} > {s['h3']}" for s in hit)) or "-"
+        rows.append([rid, q["name"], toc, _pages_text([s["page"] for s in hit]), q.get("comply", "준수"), q.get("note", "")])
+    return rows
+
+
+def write_compliance_xlsx(rows, spec, out: Path):
+    wb = Workbook()
+    ws = wb.active
+    ws.title = "조견표"
+    head = spec.get("columns", ["요구사항 고유번호", "요구사항 명칭", "제안서 목차", "쪽수", "준수 여부", "비고"])
+    widths = [14, 26, 52, 12, 10, 14]
+    for i, w in enumerate(widths):
+        ws.column_dimensions["ABCDEF"[i]].width = w
+    ws.merge_cells("A1:F1")
+    ws["A1"] = spec.get("title", "제안요청서 요구사항 조견표")
+    ws["A1"].font = Font(name=FONT, size=14, bold=True)
+    ws["A1"].alignment = Alignment(horizontal="center", vertical="center")
+    ws.row_dimensions[1].height = 30
+    ws.merge_cells("A2:F2")
+    ws["A2"] = f"(제안사 : {spec.get('proposer', '')})"
+    ws["A2"].font = Font(name=FONT, size=10)
+    ws["A2"].alignment = Alignment(horizontal="right", vertical="center")
+    for j, h in enumerate(head):
+        c = ws.cell(row=3, column=j + 1, value=h)
+        c.font = Font(name=FONT, size=10, bold=True)
+        c.fill = HEAD_FILL
+        c.alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)
+        c.border = BOX
+    ws.row_dimensions[3].height = 26
+    for i, row in enumerate(rows):
+        r = 4 + i
+        for j, val in enumerate(row):
+            c = ws.cell(row=r, column=j + 1, value=val)
+            c.font = Font(name=FONT, size=9, bold=(j == 0))
+            c.border = BOX
+            c.alignment = Alignment(horizontal="left" if j in (1, 2) else "center", vertical="center", wrap_text=True)
+            if j == 0:
+                c.fill = ITEM_FILL
+        ws.row_dimensions[r].height = _height(row, widths)
+    ws.freeze_panes = "A4"
+    ws.print_title_rows = "3:3"
+    ws.page_setup.paperSize = ws.PAPERSIZE_A4
+    ws.page_setup.orientation = "landscape"
+    ws.page_setup.fitToWidth = 1
+    ws.page_setup.fitToHeight = 0
+    ws.sheet_properties.pageSetUpPr.fitToPage = True
+    ws.page_margins = PageMargins(left=0.4, right=0.4, top=0.5, bottom=0.5)
+    ws.oddFooter.center.text = "&P / &N"
+    wb.save(out)
 
 
 def _height(row, widths):
@@ -172,11 +237,17 @@ def main(argv=None):
     args = ap.parse_args(argv)
     content = yaml.safe_load(args.content.read_text(encoding="utf-8"))
     spec = yaml.safe_load(args.spec.read_text(encoding="utf-8"))
-    rows = build_rows(content, spec)
-    missing = [r[1] for r in rows if r[4] == "-"]
+    if spec.get("format") == "compliance":
+        rows = build_compliance_rows(content, spec)
+        missing = [r[0] for r in rows if r[3] == "-"]
+        write = write_compliance_xlsx
+    else:
+        rows = build_rows(content, spec)
+        missing = [r[1] for r in rows if r[4] == "-"]
+        write = write_xlsx
     if missing:
         print("  ! 제안서 쪽수가 없는 항목:", ", ".join(missing))
-    write_xlsx(rows, spec, args.out)
+    write(rows, spec, args.out)
     print(f"저장: {args.out}  ({len(rows)}행)")
 
 

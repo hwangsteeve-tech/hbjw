@@ -363,6 +363,14 @@ class Body:
             el = _shape_by_name(s, n)._element
             el.getparent().remove(el)
         h3.width = Cm(10.3) if spec.get("req") else Cm(16.5)
+        # 소제목이 한 줄을 넘으면 글자를 줄여 위 제목과 겹치지 않게 한다
+        h3_text = spec.get("h3", "")
+        for size in (14, 12.5, 11):
+            if _est_lines(h3_text, size, Emu(h3.width).cm) <= 1:
+                break
+        if size != 14:
+            for r in h3._element.iter(qn("a:rPr")):
+                r.set("sz", str(int(size * 100)))
         if spec.get("req"):
             box = _shape(s, "ROUNDED_RECTANGLE", 12.17, 2.35, 6.19, 0.9, fill="DCE9F7", adj=0.05)
             _fill_shape_text(box, spec["req"], 10.5 if len(spec["req"]) < 30 else 9)
@@ -700,6 +708,15 @@ def _table(slide, x, y, w, rows, widths, size=9, row_h=None, heights=None, merge
     return gf
 
 
+def _chapter_page_no(slide, label):
+    """레이아웃의 연속 쪽번호를 가리고 하단 중앙에 장별 쪽번호(예: Ⅲ-5)를 넣는다."""
+    _shape(slide, "RECTANGLE", 8.3, 26.75, 2.45, 0.75, fill="FFFFFF")
+    tb = _text_box(slide, 7.5, 26.8, 4.05, 0.65, anchor="m")
+    par = tb.text_frame.paragraphs[0]
+    _para_fmt(par, align="c")
+    _add_runs(par, label, 10, FONT_M, "404040")
+
+
 # ---------------------------------------------------------------- 조립
 
 def build(content_path: Path, out_path: Path, template: Path = BASE_TEMPLATE, report=False):
@@ -715,17 +732,21 @@ def build(content_path: Path, out_path: Path, template: Path = BASE_TEMPLATE, re
 
     n_ids = sum(len(c["ids"]) for c in data.get("req_categories", []))
     req_extra = max(0, -(-n_ids // 44) - 1) if req_slide is not None else 0
-    req_pages: dict[str, list[int]] = {}
+    req_pages: dict[str, list] = {}
     fill = []
+    by_chapter = data.get("page_numbering") == "chapter"
     for ch in chapters:
         ch.setdefault("toc", [])
         build_divider(prs, ch)
-        for spec in ch.get("slides", []):
+        for k, spec in enumerate(ch.get("slides", []), start=1):
             body = Body(prs, ch, spec)
             for blk in spec.get("blocks", []):
                 kind = blk.get("type", "bullets")
                 getattr(body, kind)(blk)
             page = len(prs.slides) - n_proto + req_extra
+            if by_chapter:
+                page = f"{ch['num']}-{k}"
+                _chapter_page_no(body.s, page)
             fill.append((page, spec.get("h3") or spec.get("h2"), (body.y - Y_START) / (Y_END - Y_START)))
             for rid in re.split(r"[,\s]+", spec.get("req", "") or ""):
                 if rid:
