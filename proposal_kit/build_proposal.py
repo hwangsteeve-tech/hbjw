@@ -420,6 +420,7 @@ class Body:
             h += _est_lines(it["text"], size, w, 0.3) * _line_cm(size, 1.25) + 0.45
             for sub in it.get("sub", []):
                 h += _est_lines(sub, sub_size, w, 0.7) * _line_cm(sub_size, 1.25) + 0.12
+        h += 0.2 * len(items)  # 글꼴 차이에 대비한 여유
         frame = b.get("frame", True)
         self.warn(h, "bullets")
         if frame:
