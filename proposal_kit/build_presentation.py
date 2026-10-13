@@ -460,12 +460,26 @@ def warn(spec, need, room, what):
         print(f"  ! 넘침 {need - room:.1f}cm [{spec.get('title')}] {what}", file=sys.stderr)
 
 
+GROWABLE = {"table", "flow", "layers", "cards", "panel", "bullets"}
+
+
 def render_blocks(s, blocks, x, y, w, bottom, spec):
+    """블록을 위에서부터 쌓는다. 남는 높이는 늘어날 수 있는 블록(표·흐름도·카드 등)에
+    고르게 나눠 주어 열 아래쪽에 빈 공간이 생기지 않게 한다."""
+    ests = [_est_block(b, w) for b in blocks]
+    grow = [i for i, b in enumerate(blocks) if b.get("type", "bullets") in GROWABLE and b.get("fill", True)]
+    extra = bottom - y - 0.3 * max(0, len(blocks) - 1) - sum(ests)
+    share = extra / len(grow) if grow and extra > 0 else 0
     for i, b in enumerate(blocks):
         last = i == len(blocks) - 1
         kind = b.get("type", "bullets")
-        room = bottom - y
-        h = BLOCKS[kind](s, b, x, y, w, room if (last and b.get("fill", True)) else None, spec)
+        if last and b.get("fill", True):
+            room = bottom - y
+        elif i in grow and share > 0:
+            room = min(ests[i] + share, bottom - y)
+        else:
+            room = None
+        h = BLOCKS[kind](s, b, x, y, w, room, spec)
         y += h + 0.3
     return y - 0.3
 
@@ -480,8 +494,8 @@ def _bullets_height(items, size, w):
     return h
 
 
-def _draw_bullets(s, items, x, y, w, h, size, char="•", extra_pt=0):
-    tb = tbox(s, x, y, w, h, inset=0.12)
+def _draw_bullets(s, items, x, y, w, h, size, char="•", extra_pt=0, anchor="t"):
+    tb = tbox(s, x, y, w, h, anchor=anchor, inset=0.12)
     tf = tb.text_frame
     first = True
     for it in items:
@@ -506,14 +520,15 @@ def b_bullets(s, b, x, y, w, room, spec):
         h = max(h, room) if b.get("frame") else h
     extra = 0
     if room is not None and b.get("spread", True) and room > h * 1.15:
-        grow = min(1.25, (room / h) ** 0.5)
-        size = size * grow
+        grow = min(1.45, (room / h) ** 0.5)
+        size = min(size * grow, 15)
         h2 = _bullets_height(b["items"], size, w)
-        extra = max(0, min(14, (room - h2) / len(b["items"]) / 0.0353 * 0.55))
+        extra = max(0, min(24, (room - h2) / len(b["items"]) / 0.0353 * 0.6))
         h = room
     if b.get("frame"):
         box(s, "RECTANGLE", x, y, w, h, line=LINE)
-    _draw_bullets(s, b["items"], x, y, w, h, size, b.get("char", "•"), extra)
+    _draw_bullets(s, b["items"], x, y, w, h, size, b.get("char", "•"), extra,
+                  anchor="m" if room is not None and b.get("spread", True) else "t")
     return h
 
 
@@ -552,7 +567,7 @@ def b_cards(s, b, x, y, w, room, spec):
         warn(spec, need, room, "cards")
     base_body = body_h
     if ch - 1.0 > base_body * 1.2:
-        size = size * min(1.35, ((ch - 1.0) / base_body) ** 0.5)
+        size = min(size * min(1.5, ((ch - 1.0) / base_body) ** 0.5), 14.5)
     for i, it in enumerate(items):
         cx = x + (i % cols) * (cw + gap)
         cy = y + (i // cols) * (ch + gap)
@@ -563,8 +578,8 @@ def b_cards(s, b, x, y, w, room, spec):
         d = d if isinstance(d, list) else [d]
         if d:
             box(s, "RECTANGLE", cx + 0.2, cy + 0.82, cw - 0.4, 0.02, fill=LINE)
-            tb = tbox(s, cx + 0.15, cy + 0.9, cw - 0.3, ch - 1.0, inset=0.08)
-            gap_pt = min(10, max(2, ((ch - 1.0) - base_body * 1.3) / max(1, len(d)) / 0.0353 * 0.5))
+            tb = tbox(s, cx + 0.15, cy + 0.9, cw - 0.3, ch - 1.0, anchor="m", inset=0.08)
+            gap_pt = min(18, max(2, ((ch - 1.0) - base_body * 1.3) / max(1, len(d)) / 0.0353 * 0.5))
             for k, t in enumerate(d):
                 p = tb.text_frame.paragraphs[0] if k == 0 else tb.text_frame.add_paragraph()
                 pfmt(p, line=1.2, after=gap_pt)
@@ -587,7 +602,7 @@ def b_flow(s, b, x, y, w, room, spec):
     h = b.get("h") or (1.0 + body_h)
     if room is not None:
         warn(spec, h, room, "flow")
-        if b.get("grow"):
+        if b.get("grow", True):
             if room - 1.0 > body_h * 1.3:
                 size = size * min(1.3, ((room - 1.0) / body_h) ** 0.5)
             h = room
@@ -691,9 +706,11 @@ def b_table(s, b, x, y, w, room, spec):
         lines = max(est_lines(c, size, widths[j] - 0.25) for j, c in enumerate(r))
         heights.append(max(0.75 if i else 0.7, lines * lh(size, 1.25) + 0.4))
     need = sum(heights)
-    if room is not None and b.get("grow"):
+    if room is not None and b.get("grow", True):
         extra = (room - need) / len(rows)
         if extra > 0:
+            if "size" not in b and extra > 0.35:
+                size = min(size + 1.5, size + extra * 2)
             heights = [hh + extra for hh in heights]
             need = room
     if room is not None:
@@ -871,7 +888,8 @@ def build(path: Path, out: Path, report=False):
             print("  ! 발표자료에 연결되지 않은 평가항목:", ", ".join(missing), file=sys.stderr)
     if report:
         for n, t, r in d.fill:
-            print(f"  p{n:>3} {r * 100:5.0f}%  {t}")
+            flag = "  ← 여백 많음" if r < 0.8 else ""
+            print(f"  p{n:>3} {r * 100:5.0f}%  {t}{flag}")
     finalize(d.prs)
     set_pptx_author(d.prs)
     d.prs.save(str(out))
