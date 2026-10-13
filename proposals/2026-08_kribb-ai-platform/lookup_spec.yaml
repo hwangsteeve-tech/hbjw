@@ -1,0 +1,124 @@
+format: compliance
+proposer: 주식회사 에이치나인
+title: 제안요청서 요구사항 조견표 (연구행정 데이터 기반 AI 플랫폼 구축)
+columns:
+- 요구사항 고유번호
+- 요구사항 명칭
+- 제안서 목차
+- 쪽수
+- 준수 여부
+- 비고
+requirements:
+  ECR-001:
+    name: 운영 서버 SW 환경 구축 지원
+    comply: 준수
+  SFR-001:
+    name: 지능형 AI 인프라 및 운영 환경 구축
+    comply: 준수
+  SFR-002:
+    name: 지식베이스 고도화 및 데이터 파이프라인
+    comply: 준수
+  SFR-003:
+    name: 연구행정 법령·규정 RAG 기반 질의응답 서비스 개발
+    comply: 준수
+  SFR-004:
+    name: 생성형 AI 기반 구매 이상거래 탐지 서비스
+    comply: 준수
+  SFR-005:
+    name: 엔터프라이즈 보안 및 권한 관리
+    comply: 준수
+  PER-001:
+    name: 응답 지연 시간 관리
+    comply: 준수
+  PER-002:
+    name: 동시 접속 성능 보장
+    comply: 준수
+  PER-003:
+    name: 생성 답변 정확도
+    comply: 준수
+  DAR-001:
+    name: 데이터베이스 표준화 준수
+    comply: 준수
+  DAR-002:
+    name: 데이터 관리 및 변경 내역관리
+    comply: 준수
+  DAR-003:
+    name: 데이터 청킹(Chunking) 최적화
+    comply: 준수
+  TER-001:
+    name: 시험 및 운영
+    comply: 준수
+  SER-001:
+    name: 정보보안교육 실시
+    comply: 준수
+  SER-002:
+    name: 정보 유출 방지
+    comply: 준수
+  SER-003:
+    name: 보안관리
+    comply: 준수
+  SER-004:
+    name: 장비 및 매체 보안관리
+    comply: 준수
+  SER-005:
+    name: 보안 취약점 점검
+    comply: 준수
+  QUR-001:
+    name: 품질관리 활동
+    comply: 준수
+  QUR-002:
+    name: 형상관리
+    comply: 준수
+  COR-001:
+    name: 저작권 및 지식재산권 보호
+    comply: 준수
+  COR-002:
+    name: 웹 접근성 준수
+    comply: 준수
+  COR-003:
+    name: 개인정보보호 준수
+    comply: 준수
+  COR-004:
+    name: 개발표준 준수
+    comply: 준수
+  PMR-001:
+    name: 사업수행 일반
+    comply: 준수
+  PMR-002:
+    name: 사업관리 조직 구성
+    comply: 준수
+  PMR-003:
+    name: 사업수행계획 수립
+    comply: 준수
+  PMR-004:
+    name: 개발환경
+    comply: 준수
+  PMR-005:
+    name: 산출물 관리
+    comply: 준수
+  PMR-006:
+    name: 검수 및 위험관리
+    comply: 준수
+  PMR-007:
+    name: 프로젝트 관리 방법
+    comply: 준수
+  PMR-008:
+    name: 보고 관리
+    comply: 준수
+  PMR-009:
+    name: 책임이행 및 손해배상
+    comply: 준수
+    note: 계약조건 수용
+  PMR-010:
+    name: 분쟁의 해결
+    comply: 준수
+    note: 계약조건 수용
+  PSR-001:
+    name: 교육 및 기술지원
+    comply: 준수
+  PSR-002:
+    name: 하자보수 및 안정화
+    comply: 준수
+  PSR-003:
+    name: 장애복구 대책
+    comply: 준수
