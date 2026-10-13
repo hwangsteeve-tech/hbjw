@@ -31,6 +31,7 @@ meta:
   pm_line: 사업PM 홍길동 파트너
   org_lines: ["주관기관: 에이치나인", "참여기관: ○○"]
 
+req_table: true                 # false면 요구사항 분석표 슬라이드를 넣지 않음
 req_categories:                 # 요구사항 분석표 (본문 req 필드에서 쪽수를 자동 계산)
   - {name: 기능, ids: [FUR-001, FUR-002]}
 
