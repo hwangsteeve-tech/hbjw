@@ -84,3 +84,20 @@ python -m proposal_kit.build_lookup_table proposals/2026-10_pnu-ai-platform/cont
 
 `lookup_spec.yaml`에는 사업별로 RFP 요구사항(명칭·정의·쪽수)과 평가항목별 행 구성을 적습니다.
 요구사항 ID가 없는 평가항목(사업이해도, 일정계획 등)은 `chapter`와 `header`로 해당 절의 슬라이드를 찾습니다.
+
+## 제안 발표자료 (16:9)
+
+`reference/h9_발표자료_예시_AI학습용데이터.pdf` 형식(표지 · 평가항목 조견표 · CONTENTS · 장 간지 · 모듈 간지 · 핵심 비주얼 · 본문 · 마무리)으로 발표자료를 만듭니다.
+간지 배경은 `templates/presentation/`의 이미지를 씁니다.
+
+```bash
+python -m proposal_kit.build_presentation proposals/2026-10_pnu-ai-platform/presentation.yaml \
+    -o proposals/2026-10_pnu-ai-platform/발표자료.pptx --report
+```
+
+- `eval_items`: 평가항목 조견표 행. 본문 슬라이드의 `eval: [평가항목명]`에서 해당 페이지를 자동으로 채웁니다.
+- 슬라이드 `kind`: `body`(기본) · `visual`(밝은 배경 핵심 메시지) · `module`(모듈 간지)
+- 본문 키: `title`(머리띠 제목), `num` + `subtitle`(01 소제목), `headline`(파란 점 헤드라인), `conclusion`(하단 결론 띠), `req`, `eval`
+- 본문은 `columns: [{w: 비율, arrow_after: true, blocks: [...]}]`로 열을 나누거나 `blocks`만 씁니다.
+- 블록: `panel`(남색 제목 상자, 안에 blocks), `cards`, `flow`, `compare`(As-Is/To-Be), `layers`, `table`, `kpi`, `bullets`, `label`, `text`, `callout`, `note`
+- 강조: `**파랑**`, `!!빨강!!`
