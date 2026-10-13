@@ -343,11 +343,15 @@ def build_req_table(prs, slide, req_index, title="< 요구사항 분석표 >"):
 # ---------------------------------------------------------------- 본문 슬라이드
 
 class Body:
-    def __init__(self, prs, chapter, spec):
+    def __init__(self, prs, chapter, spec, boost=0, quiet=False):
         self.prs = prs
         self.s = _duplicate(prs, PROTO_BODY)
         self.y = Y_START
         self.spec = spec
+        # boost: 여백이 남을 때 글자 크기·행 간격을 키우는 단계 (0 = 기본)
+        self.boost = boost
+        self.quiet = quiet
+        self.overflow = False
         s = self.s
         _replace_text(_shape_by_name(s, "텍스트 개체 틀 9"), spec["header"])
         _replace_text(_shape_by_name(s, "TextBox 28"), f"{chapter['num']}. {chapter['title']}")
@@ -405,8 +409,14 @@ class Body:
     def room(self):
         return Y_END - self.y
 
+    def sz(self, b, default):
+        return b.get("size", default) + 0.5 * self.boost
+
     def warn(self, need, what):
         if need > self.room() + 0.05:
+            self.overflow = True
+            if self.quiet:
+                return
             print(f"  ! 넘침 {need - self.room():.1f}cm  [{self.spec.get('h3') or self.spec.get('h2')}] {what}",
                   file=sys.stderr)
 
@@ -421,7 +431,7 @@ class Body:
 
     def bullets(self, b):
         items = b["items"]
-        size = b.get("size", 12)
+        size = self.sz(b, 12)
         sub_size = b.get("sub_size", size - 1)
         x = X0 + 0.15
         w = W - 0.3
@@ -454,7 +464,7 @@ class Body:
         self.y += h + 0.35
 
     def text(self, b):
-        size = b.get("size", 11)
+        size = self.sz(b, 11)
         h = _est_lines(b["text"], size, W) * _line_cm(size, 1.3) + 0.2
         tb = _text_box(self.s, X0, self.y, W, h, inset=0.05)
         par = tb.text_frame.paragraphs[0]
@@ -474,7 +484,7 @@ class Body:
         if b.get("caption"):
             self.caption({"text": b["caption"]})
         rows = [b["header"]] + b["rows"]
-        size = b.get("size", 10.5)
+        size = self.sz(b, 10.5)
         widths = b.get("widths")
         total = W - 0.2
         if not widths:
@@ -485,7 +495,8 @@ class Body:
         heights = []
         for r_i, row in enumerate(rows):
             lines = max(_est_lines(c, size + (1 if r_i == 0 else 0), widths[j] - 0.2) for j, c in enumerate(row))
-            heights.append(max(0.95 if r_i else 0.85, lines * _line_cm(size, 1.3) + 0.4))
+            pad = 0.4 + 0.12 * self.boost
+            heights.append(max((0.95 if r_i else 0.85) + 0.2 * self.boost, lines * _line_cm(size, 1.3) + pad))
         need = sum(heights)
         self.warn(need, f"table {b.get('caption', '')}")
         _table(self.s, X0 + 0.1, self.y, total, rows, widths=widths, size=size, heights=heights,
@@ -501,13 +512,13 @@ class Body:
         n = len(steps)
         gap = 0.3
         w = (W - 0.2 - gap * (n - 1)) / n
-        desc_size = b.get("size", 10)
+        desc_size = self.sz(b, 10)
         body_h = 0.3
         for st in steps:
             items = st.get("items") or [st.get("desc", "")]
             hh = sum(_est_lines(t, desc_size, w - 0.4) * _line_cm(desc_size, 1.3) + 0.12 for t in items)
             body_h = max(body_h, hh + 0.25)
-        body_h = max(body_h, 1.6)
+        body_h = max(body_h, 1.6 + 0.3 * self.boost)
         h = 0.75 + body_h
         self.warn(h, "flow")
         for i, st in enumerate(steps):
@@ -537,7 +548,7 @@ class Body:
         label_w, result_w = 2.4, 2.8
         mid_x = X0 + 0.2 + label_w + 0.3
         mid_w = W - 0.2 - label_w - 0.3 - result_w - 0.35
-        box_h = 1.0
+        box_h = 1.0 + 0.15 * self.boost
         cols = b.get("cols", 2)
         total = 0
         layout = []
@@ -577,7 +588,7 @@ class Body:
         cols = b.get("cols", 3)
         gap = 0.25
         w = (W - 0.2 - gap * (cols - 1)) / cols
-        size = b.get("size", 10)
+        size = self.sz(b, 10)
         rows_n = -(-len(items) // cols)
         body_h = 0.3
         for it in items:
@@ -585,7 +596,7 @@ class Body:
             lines = body if isinstance(body, list) else [body]
             hh = sum(_est_lines(t, size, w - 0.3) * _line_cm(size, 1.3) + 0.1 for t in lines)
             body_h = max(body_h, hh + 0.2)
-        body_h = max(body_h, 1.8)
+        body_h = max(body_h, 1.8 + 0.3 * self.boost)
         h = 0.7 + body_h
         need = rows_n * (h + gap)
         self.warn(need, "boxes")
@@ -644,7 +655,7 @@ class Body:
         self.y += 0.5
 
     def callout(self, b):
-        size = b.get("size", 10.5)
+        size = self.sz(b, 10.5)
         h = _est_lines(b["text"], size, W - 0.6) * _line_cm(size, 1.35) + 0.45
         self.warn(h, "callout")
         bx = _shape(self.s, "ROUNDED_RECTANGLE", X0, self.y, W, h, fill="FFF4E5", line="F4B183", adj=0.06)
@@ -680,7 +691,7 @@ class Body:
     def themes(self, b):
         """번호 카드(차별화 요소 등): items: [{title, text, points:[...]}] — 번호는 순서대로 01, 02 …"""
         items = b["items"]
-        size = b.get("size", 10)
+        size = self.sz(b, 10)
         num_w = 1.5
         tx = X0 + 0.1 + num_w + 0.3
         tw = W - 0.2 - num_w - 0.5
@@ -724,7 +735,7 @@ class Body:
 
     def point(self, b):
         """제목이 있는 강조 상자 (설계 관점 · 제안 요지 등): {title, text, color: green|blue|navy}"""
-        size = b.get("size", 10)
+        size = self.sz(b, 10)
         style = {"green": ("EAF6EF", "1E7B4F", "333333"), "blue": ("EEF4FB", BLUE, "333333"),
                  "navy": (NAVY, "FFE699", "FFFFFF")}[b.get("color", "green")]
         lines = _est_lines(b["text"], size, W - 0.8) * _line_cm(size, 1.35)
@@ -807,6 +818,32 @@ def _chapter_page_no(slide, label):
 
 # ---------------------------------------------------------------- 조립
 
+
+def _draw(prs, ch, spec, boost, quiet):
+    body = Body(prs, ch, spec, boost=boost, quiet=quiet)
+    for blk in spec.get("blocks", []):
+        getattr(body, blk.get("type", "bullets"))(blk)
+    return body
+
+
+def _render_body(prs, ch, spec, auto_fit=True, target=0.85, max_boost=4):
+    """본문 슬라이드를 그린다. 여백이 많으면(채움 < target) 넘치지 않는 범위에서
+    글자 크기·표 행 간격을 한 단계씩 키워 다시 그린다."""
+    body = _draw(prs, ch, spec, 0, quiet=False)
+    if not auto_fit or body.overflow:
+        return body
+    best = 0
+    for boost in range(1, max_boost + 1):
+        if (body.y - Y_START) / (Y_END - Y_START) >= target:
+            break
+        _delete_slide(prs, len(prs.slides) - 1)
+        trial = _draw(prs, ch, spec, boost, quiet=True)
+        if trial.overflow:
+            _delete_slide(prs, len(prs.slides) - 1)
+            return _draw(prs, ch, spec, best, quiet=True)
+        body, best = trial, boost
+    return body
+
 def build(content_path: Path, out_path: Path, template: Path = BASE_TEMPLATE, report=False):
     data = load_content(content_path)
     prs = Presentation(str(template))
@@ -827,10 +864,7 @@ def build(content_path: Path, out_path: Path, template: Path = BASE_TEMPLATE, re
         ch.setdefault("toc", [])
         build_divider(prs, ch)
         for k, spec in enumerate(ch.get("slides", []), start=1):
-            body = Body(prs, ch, spec)
-            for blk in spec.get("blocks", []):
-                kind = blk.get("type", "bullets")
-                getattr(body, kind)(blk)
+            body = _render_body(prs, ch, spec, auto_fit=data.get("auto_fit", True))
             page = len(prs.slides) - n_proto + req_extra
             if by_chapter:
                 page = f"{ch['num']}-{k}"

@@ -1,0 +1,48 @@
+# 순천향대 RFP Ⅴ-2: "기술평가 항목별 배점 기준표를 기준으로 조견표를 작성하고, 제안서 목차와 해당 페이지를 기술"
+proposer: 주식회사 에이치나인
+title: 기술평가 항목별 조견표 (AI의료융합데이터센터 플랫폼 구축 사업)
+rfp_ref_header: RFP 위치
+evaluation:
+- item: "정량 · 경영상태"
+  score: 10
+  rows:
+  - {label: 정량, rfp_page: Ⅳ.5, rfp_text: "재무구조 및 신용평가 기관의 신용도 (신용평가등급확인서)", chapter: Ⅰ, header: 3. 제안사 재무 구조}
+- item: "정량 · 수행실적"
+  score: 10
+  rows:
+  - {label: 정량, rfp_page: Ⅳ.5, rfp_text: "최근 3년 대학·공공기관 등 유사용역 실적 (단일계약 5천만 원 이상)", chapter: Ⅱ, header: 2. 유사분야 사업실적}
+- item: 전략 및 방법론
+  score: 10
+  rows:
+  - {label: 전략, rfp_page: "Ⅰ, Ⅳ.5", rfp_text: "사업 특성·목표에 부합하는 사업전략, 일정·위험을 고려한 추진 전략", chapter: Ⅲ, h3: ["1.1.1", "1.2.1"]}
+  - {label: 확장성, rfp_page: "Ⅱ.3", rfp_text: "적용 기술의 확장성·실현 가능성", chapter: Ⅲ, h3: ["1.3.1", "2.1.1"]}
+  - {label: 방법론, rfp_page: "Ⅱ.5", rfp_text: "개발 방법론, 적용 사례·경험 기반 단계별 산출물", chapter: Ⅲ, h3: ["1.4.1"]}
+  - {label: 특징, rfp_page: "Ⅴ.3", rfp_text: "제안의 특징 및 장점, 유사용역 수행경험", chapter: Ⅰ, header: 5. 제안의 특징 및 장점}
+- item: 기술 및 기능
+  score: 20
+  rows:
+  - {label: 기능, rfp_page: "Ⅲ.2~3", rfp_text: "ECR-001, SR-001~008 구현 방안", chapter: Ⅲ, h3: ["2.1.1", "2.2.1", "3.1.", "3.2.", "3.3.", "3.4.", "3.5."]}
+  - {label: 보안, rfp_page: "Ⅲ.9", rfp_text: "SER-001~002 보안 요구사항 적용 방안", chapter: Ⅲ, h3: ["3.7.1"]}
+  - {label: 데이터, rfp_page: "Ⅲ.3·7", rfp_text: "데이터 전환 계획·검증, 오류 처리", chapter: Ⅲ, h3: ["3.6.1"]}
+  - {label: 운영, rfp_page: "Ⅲ.7", rfp_text: "운영 절차, 비상사태 대응 (DAR-001)", chapter: Ⅲ, h3: ["3.9.1"]}
+  - {label: 제약, rfp_page: "Ⅲ.4", rfp_text: "COR-001~003 제약조건 충족·테스트 방안", chapter: Ⅲ, h3: ["3.10.1"]}
+- item: 성능 및 품질
+  score: 15
+  rows:
+  - {label: 성능, rfp_page: "Ⅲ.8", rfp_text: "성능 구현·테스트 방안 (TER-001)", chapter: Ⅲ, h3: ["3.8.3"]}
+  - {label: 품질, rfp_page: "Ⅲ.10", rfp_text: "단계별 품질 점검·검토 (QUR-001)", chapter: Ⅳ, h3: ["1.7.1"]}
+  - {label: 시스템 IF, rfp_page: "Ⅲ.3", rfp_text: "타 시스템 연계 장단점 분석·인터페이스 방안", chapter: Ⅲ, h3: ["3.8.1"]}
+  - {label: 사용자 IF, rfp_page: "Ⅱ.4", rfp_text: "사용자 인터페이스 분석·설계·구현·테스트", chapter: Ⅲ, h3: ["3.8.2"]}
+- item: 프로젝트 관리
+  score: 10
+  rows:
+  - {label: 관리, rfp_page: "Ⅲ.5", rfp_text: "PMR-001~011 조직·일정·위험·보안·산출물 관리", chapter: Ⅳ, header: 1. 관리 부문}
+- item: 프로젝트 지원
+  score: 15
+  rows:
+  - {label: 지원, rfp_page: "Ⅲ.6", rfp_text: "시험운영, 교육훈련, 기술이전, 하자보수 (PSR-001~003)", chapter: Ⅳ, header: 2. 지원 부문}
+  - {label: 백업·장애, rfp_page: "Ⅲ.7", rfp_text: "백업/복구 및 장애대응 대책 (DAR-001)", chapter: Ⅲ, h3: ["3.9.1"]}
+- item: 기타
+  score: "-"
+  rows:
+  - {label: "-", rfp_page: "Ⅴ.3", rfp_text: "추가 제안 및 협의 필요 사항", chapter: Ⅳ, header: 3. 기타}
