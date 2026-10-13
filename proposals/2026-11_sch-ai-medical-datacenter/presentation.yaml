@@ -232,46 +232,22 @@ chapters:
     headline: "EMR은 **FHIR로 직접 저장**, 영상은 DICOM 태그를 자동 추출해 **적재 시점 색인** — 복합 조건 검색과 코호트로 연구자가 바로 활용"
     req: SR-002
     eval: [기능 구현]
-    columns:
-      - w: 1
-        blocks:
-          - type: panel
-            title: 통합 저장 · 색인
-            blocks:
-              - type: bullets
-                size: 10.5
-                items:
-                  - {text: "유형별 저장소(FHIR·DICOM·문서) + 공통 인덱싱 DB"}
-                  - {text: "DICOM 태그 자동 추출, 유형별 메타 스키마"}
-                  - {text: "EMR 기초정보로 메타데이터 태깅"}
-                  - {text: "다중 데이터 그룹 계층화·일괄 검색"}
-                  - {text: "적재 현황 모니터링 (관제 연동)"}
-      - w: 1
-        blocks:
-          - type: panel
-            title: 검색 · 코호트
-            blocks:
-              - type: bullets
-                size: 10.5
-                items:
-                  - {text: "복합 조건·판독문 키워드·썸네일 검색"}
-                  - {text: "코호트 조건 저장·태깅·사용자 관리"}
-                  - {text: "코호트별 접근 제어·만료 일시"}
-                  - {text: "CSV Export, 관리자 로그 확인"}
-                  - {text: "개인 폴더에 검색 조건 저장"}
-      - w: 1
-        blocks:
-          - type: panel
-            title: 추출 · 다운로드
-            blocks:
-              - type: bullets
-                size: 10.5
-                items:
-                  - {text: "원본·DICOM·JPEG·XML·JSON 변환"}
-                  - {text: "처방단위 폴더·파일명 지정 옵션"}
-                  - {text: "승인 → 비식별 → 추가 인증 후 다운로드"}
-                  - {text: "추출 이력 감사 추적"}
-                  - {text: "추출 대상 목록 자동 생성"}
+    blocks:
+      - type: table
+        size: 11
+        merge_first: true
+        header: [영역, 기능, 구현 방안]
+        widths: [3.2, 5, 15]
+        rows:
+          - [통합 저장 · 색인, 유형별 저장, "FHIR · DICOM · 문서 저장소 + 공통 인덱싱 DB (적재 시점 색인)"]
+          - [통합 저장 · 색인, 메타데이터 추출, "DICOM 태그 자동 추출, 유형별 메타 스키마, EMR 기초정보 태깅"]
+          - [통합 저장 · 색인, 데이터 그룹, "다중 그룹 계층화 · 일괄 검색, 적재 현황 모니터링"]
+          - [검색 · 코호트, 통합 검색, "복합 조건 · 판독문 키워드 · 검사 메타정보 검색, 썸네일 확인"]
+          - [검색 · 코호트, 연구 코호트, "조건 개인 폴더 저장 · 결과 태깅, 사용자 관리, 접근 제어 · 만료 일시"]
+          - [검색 · 코호트, 결과 활용, "CSV Export (관리자 로그 확인), 추출 대상 목록 자동 생성"]
+          - [추출 · 다운로드, 포맷 변환, "원본 · DICOM · JPEG · XML · JSON 변환 추출"]
+          - [추출 · 다운로드, 폴더 옵션, "처방단위 하위 폴더 · 단일 폴더 · 폴더·파일명 지정"]
+          - [추출 · 다운로드, 반출 통제, "승인 → 비식별 → 추가 인증 후 다운로드, 추출 이력 감사 추적"]
 
   - title: 4. DICOM Web 뷰어 · EMR 연동
     headline: "**HTML5 Zero-footprint 뷰어**로 설치 없이 조회하고, 환자의 다른 검사 · 문서를 함께 비교하며, EMR · CDW에서 **토큰으로 바로 호출**"
@@ -327,6 +303,15 @@ chapters:
             items:
               - {value: "k≥5", label: "k-익명성"}
               - {value: "SHA-256", label: "해시 + 솔트 가명"}
+          - type: table
+            size: 10
+            header: [단계, 통제]
+            widths: [2.6, 6]
+            rows:
+              - [요청, "코호트 기반 대상 목록, 사유 기재"]
+              - [승인, "데이터 관리자·IRB 승인 기록"]
+              - [처리, "원본 영역과 분리된 익스포트 서버"]
+              - [반출, "추가 인증, 다운로드 이력 감사"]
       - w: 1.2
         blocks:
           - type: table
@@ -361,6 +346,14 @@ chapters:
               - {title: 판정, desc: "경고/장애"}
               - {title: 알림, desc: "메일·SMS"}
               - {title: 조치, desc: "이력 기록"}
+          - type: table
+            size: 10
+            header: [알림 대상, 수신 범위]
+            widths: [3, 6]
+            rows:
+              - [병원 담당자, "소속 병원 에이전트·수집 오류"]
+              - [데이터 관리자, "전체 수집 지연·오류율"]
+              - [시스템 관리자, "장애 판정·백업 실패"]
       - w: 1.1
         blocks:
           - type: table
@@ -600,6 +593,14 @@ chapters:
               - {name: 협업, items: ["병원 전산팀 ×4", "EMR·PACS 운영사"], side: "COR-002"}
               - {name: 총괄, items: [PM, 품질, 보안], side: "단일 창구"}
               - {name: 수행, items: [수집, 표준화, 카탈로그, 비식별·관제], side: "상주"}
+          - type: table
+            size: 10
+            header: [협의 체계, 참여, 주기]
+            widths: [3, 4.6, 2]
+            rows:
+              - [주간 회의, "데이터센터 담당·PM", 매주]
+              - [병원 연동 협의, "병원 전산팀·운영사·파트", 격주]
+              - [소위원회, "상세설계·표준안 확정", 단계별]
       - w: 1
         blocks:
           - type: table

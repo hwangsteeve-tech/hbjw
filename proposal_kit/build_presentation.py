@@ -292,7 +292,9 @@ class Deck:
         add_text(tb.text_frame.paragraphs[0], "CONTENTS", 40, "Arial Black", "0B3AA4")
         n = len(chapters)
         cols = 3 if n > 4 else n
-        bw, bh, gx, gy = 9.4, 5.0, 1.0, 1.35
+        gx, gy, bh = 1.0, 1.35, 5.0
+        # 장 수가 많아도 화면 안에 들어오도록 상자 폭을 맞춘다
+        bw = min(9.4, (W - 2.4 - (cols - 1) * gx) / cols)
         x0 = (W - (cols * bw + (cols - 1) * gx)) / 2
         for i, ch in enumerate(chapters):
             x = x0 + (i % cols) * (bw + gx)
@@ -306,7 +308,7 @@ class Deck:
             tb = tbox(s, x, y + 0.5, bw, bh - 0.5, anchor="m")
             p = tb.text_frame.paragraphs[0]
             pfmt(p, "c")
-            add_text(p, ch["title"], 20, FB, DARK)
+            add_text(p, ch["title"], 20 if bw >= 9 else 17, FB, DARK)
         return s
 
     def divider(self, ch):
@@ -460,7 +462,7 @@ def warn(spec, need, room, what):
         print(f"  ! 넘침 {need - room:.1f}cm [{spec.get('title')}] {what}", file=sys.stderr)
 
 
-GROWABLE = {"table", "flow", "layers", "cards", "panel", "bullets"}
+GROWABLE = {"table", "layers", "cards", "panel", "bullets"}  # 흐름도는 늘리면 빈 상자처럼 보여 제외
 
 
 def render_blocks(s, blocks, x, y, w, bottom, spec):
@@ -602,7 +604,7 @@ def b_flow(s, b, x, y, w, room, spec):
     h = b.get("h") or (1.0 + body_h)
     if room is not None:
         warn(spec, h, room, "flow")
-        if b.get("grow", True):
+        if b.get("grow"):
             if room - 1.0 > body_h * 1.3:
                 size = size * min(1.3, ((room - 1.0) / body_h) ** 0.5)
             h = room
@@ -760,10 +762,14 @@ def table(s, x, y, w, rows, widths, size, heights, merge_first=False, header_fil
             sf = etree.SubElement(tcPr, qn("a:solidFill"))
             etree.SubElement(sf, qn("a:srgbClr")).set("val", fill)
     if merge_first:
+        # 첫 열이 비어 있으면 위 칸과 같은 그룹으로 본다
+        key = []
+        for r in rows:
+            key.append(r[0] if (r[0] or not key) else key[-1])
         start = 1
         for i in range(2, len(rows) + 1):
-            if i == len(rows) or rows[i][0] != rows[start][0]:
-                if i - 1 > start and rows[start][0]:
+            if i == len(rows) or key[i] != key[start]:
+                if i - 1 > start and key[start]:
                     for k in range(start + 1, i):
                         for r in tbl.cell(k, 0).text_frame.paragraphs[0].runs:
                             r.text = ""
