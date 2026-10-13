@@ -71,3 +71,16 @@ chapters:
 - 각 본문 슬라이드에 해당 요구사항 ID를 `req`로 달아야 분석표의 쪽수가 채워집니다. 빌드할 때 본문에 연결되지 않은 요구사항 ID를 알려 줍니다.
 - 회사 고유 정보(실적, 인력, 신용등급 등)는 `【 】`로 표시하고 확인한 뒤 채웁니다.
 - 복잡한 그림(화면 시안, 상세 구성도)은 생성된 PPT에서 직접 추가하고, 여기서는 뼈대와 문안을 만듭니다.
+
+## 제안요청서 대비 조견표 (엑셀)
+
+RFP가 요구하는 조견표를 예시 양식(평가항목 · 요구사항 구분 · 제안요청서 쪽수/내용 · 제안사항 쪽수/내용 · 비고)대로 만듭니다.
+제안서 쪽수는 `content.yaml`의 슬라이드 순서와 `req` 필드에서 계산하므로, 제안서를 고친 뒤 다시 실행하면 쪽수가 맞춰집니다.
+
+```bash
+python -m proposal_kit.build_lookup_table proposals/2026-10_pnu-ai-platform/content.yaml \
+    proposals/2026-10_pnu-ai-platform/lookup_spec.yaml -o proposals/2026-10_pnu-ai-platform/조견표.xlsx
+```
+
+`lookup_spec.yaml`에는 사업별로 RFP 요구사항(명칭·정의·쪽수)과 평가항목별 행 구성을 적습니다.
+요구사항 ID가 없는 평가항목(사업이해도, 일정계획 등)은 `chapter`와 `header`로 해당 절의 슬라이드를 찾습니다.
