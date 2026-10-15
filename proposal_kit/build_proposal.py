@@ -316,27 +316,86 @@ def build_divider(prs, ch):
     return s
 
 
-def build_req_table(prs, slide, req_index, title="< 요구사항 분석표 >"):
-    """요구사항 분석표 슬라이드: 기존 표를 지우고 분류 · ID · 페이지 표를 새로 만든다."""
+def _compact_pages(pages):
+    """['Ⅲ-3', 'Ⅲ-4', 'Ⅲ-5', 'Ⅳ-1'] → 'Ⅲ-3~5, Ⅳ-1' (숫자 쪽번호도 같은 방식)."""
+    groups: dict = {}
+    for p in pages:
+        ch, _, n = str(p).rpartition("-")
+        if not n.isdigit():
+            groups.setdefault(str(p), [])
+            continue
+        groups.setdefault(ch, []).append(int(n))
+    out = []
+    for ch, nums in groups.items():
+        if not nums:
+            out.append(ch)
+            continue
+        nums = sorted(set(nums))
+        pre = f"{ch}-" if ch else ""
+        start = prev = nums[0]
+        for n in nums[1:] + [None]:
+            if n is not None and n == prev + 1:
+                prev = n
+                continue
+            out.append(f"{pre}{start}" + (f"~{prev}" if prev != start else ""))
+            if n is not None:
+                start = prev = n
+    return ", ".join(out)
+
+
+def build_req_table(prs, slide, req_index, title=None, compliance=None):
+    """요구사항 분석표 슬라이드: 기존 표를 지우고 분류 · ID · 페이지 표를 새로 만든다.
+
+    compliance({ID: {name, comply}})가 있으면 '요구사항 대비 수용여부 조견표'로 만들어
+    분류 · ID · 명칭 · 수용 여부 · 해당 페이지를 보인다.
+    """
     for shp in list(slide.shapes):
         if shp.has_table:
             shp._element.getparent().remove(shp._element)
-    rows = [("요구사항 분류", "ID", "해당 페이지")]
-    for cat, items in req_index:
-        for rid, pages in items:
-            rows.append((cat, rid, ", ".join(str(p) for p in pages) if pages else "-"))
+    if compliance is not None:
+        title = title or "< 요구사항 대비 수용여부 조견표 >"
+        rows = [("분류", "고유번호", "요구사항 명칭", "수용 여부", "해당 페이지")]
+        for cat, items in req_index:
+            for rid, pages in items:
+                info = compliance.get(rid) or {}
+                rows.append((cat, rid, info.get("name", "【명칭】"), info.get("comply", "수용"),
+                             _compact_pages(pages) if pages else "-"))
+        widths = [2.3, 2.1, 7.2, 1.7, 3.0]
+    else:
+        rows = [("요구사항 분류", "ID", "해당 페이지")]
+        for cat, items in req_index:
+            for rid, pages in items:
+                rows.append((cat, rid, ", ".join(str(p) for p in pages) if pages else "-"))
+        widths = [5.4, 5.4, 5.5]
+    if title:
+        for shp in slide.shapes:
+            if shp.has_text_frame and "요구사항" in shp.text_frame.text:
+                _replace_text(shp, title)
     # 한 장에 최대 45행. 넘치면 두 장으로 나눈다.
-    chunks = [rows[1:][i:i + 44] for i in range(0, max(1, len(rows) - 1), 44)]
+    body = rows[1:]
+    n_pages = max(1, -(-len(body) // 44))
+    per = -(-len(body) // n_pages) if body else 44  # 여러 장이면 고르게 나눈다
+    chunks = [body[i:i + per] for i in range(0, max(1, len(body)), per)]
     slides = [slide]
     for _ in chunks[1:]:
         extra = _duplicate(prs, PROTO_REQ)
         for shp in list(extra.shapes):
             if shp.has_table:
                 shp._element.getparent().remove(shp._element)
+            elif title and shp.has_text_frame and "요구사항" in shp.text_frame.text:
+                _replace_text(shp, title)
         slides.append(extra)
     for sl, chunk in zip(slides, chunks):
         data = [rows[0]] + chunk
-        _table(sl, 1.4, 1.3, 16.3, data, widths=[5.4, 5.4, 5.5], size=8, row_h=0.52, merge_first=True)
+        row_h = min(0.78, 0.52 * 45 / len(data))
+        tbl = _table(sl, 1.4, 1.3, 16.3, data, widths=widths, size=8 if row_h < 0.62 else 9,
+                     row_h=row_h, merge_first=True).table
+        if compliance is not None:
+            # 명칭 칸은 왼쪽 정렬, 해당 페이지 칸은 가운데 정렬
+            for i in range(1, len(data)):
+                for j, al in ((2, "l"), (4, "ctr")):
+                    for par in tbl.cell(i, j).text_frame.paragraphs:
+                        par._p.get_or_add_pPr().set("algn", al)
     return slides
 
 
@@ -883,7 +942,12 @@ def build(content_path: Path, out_path: Path, template: Path = BASE_TEMPLATE, re
         missing = sorted(set(req_pages) - {r for c in cats for r in c["ids"]})
         if missing:
             index.append(("기타", [(rid, sorted(set(req_pages[rid]))) for rid in missing]))
-        build_req_table(prs, req_slide, index)
+        comp = None
+        if data.get("req_compliance"):
+            import yaml
+            cpath = (content_path.parent / data["req_compliance"])
+            comp = (yaml.safe_load(cpath.read_text(encoding="utf-8")) or {}).get("requirements") or {}
+        build_req_table(prs, req_slide, index, title=data.get("req_table_title"), compliance=comp)
         unmapped = [rid for c in cats for rid in c["ids"] if rid not in req_pages]
         if unmapped:
             print("  ! 본문에 연결되지 않은 요구사항:", ", ".join(unmapped), file=sys.stderr)

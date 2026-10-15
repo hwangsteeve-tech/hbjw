@@ -34,6 +34,8 @@ meta:
 req_table: true                 # false면 요구사항 분석표 슬라이드를 넣지 않음
 req_categories:                 # 요구사항 분석표 (본문 req 필드에서 쪽수를 자동 계산)
   - {name: 기능, ids: [FUR-001, FUR-002]}
+req_compliance: lookup_spec.yaml  # (선택) 지정하면 분석표가 '요구사항 대비 수용여부 조견표'가 됨
+                                  # — 분류·고유번호·명칭·수용 여부·해당 페이지 (명칭·comply는 lookup_spec의 requirements)
 
 chapters:
   - num: Ⅰ                      # 'no'는 YAML에서 false로 읽히므로 num을 씁니다
