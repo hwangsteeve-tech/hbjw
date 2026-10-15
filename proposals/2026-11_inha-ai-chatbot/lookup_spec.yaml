@@ -1,0 +1,170 @@
+format: compliance
+proposer: 주식회사 에이치나인
+title: 요구사항 대비 수용여부 조견표 (AI 기반 통합 학생·취업지원 챗봇 서비스 구축 고도화)
+columns:
+- 요구사항 고유번호
+- 요구사항 명칭
+- 제안서 목차
+- 쪽수
+- 수용 여부
+- 비고
+requirements:
+  ECR-01:
+    name: "시스템 구성요건 공통사항"
+    comply: 수용
+  ECR-02:
+    name: "서버 구성 및 운영환경"
+    comply: 수용
+    note: "서버는 대학 제공 (COR-03) — 사양만 제시"
+  ECR-03:
+    name: "스토리지 및 네트워크"
+    comply: 수용
+  SFR-01:
+    name: "기능요구 공통사항"
+    comply: 수용
+  SFR-02:
+    name: "취업·진로 안내 챗봇 답변 품질 고도화"
+    comply: 수용
+  SFR-03:
+    name: "취업·진로 안내 챗봇 기능 확장"
+    comply: 수용
+  SFR-04:
+    name: "규정집 수집 및 구조화"
+    comply: 수용
+  SFR-05:
+    name: "규정집 안내 챗봇"
+    comply: 수용
+  SFR-06:
+    name: "대표·주요 시설 홈페이지 콘텐츠 수집·인덱싱"
+    comply: 수용
+  SFR-07:
+    name: "대표·주요 시설 홈페이지 콘텐츠 안내"
+    comply: 수용
+  SFR-08:
+    name: "에이전트 생성 및 자동 라우팅"
+    comply: 수용
+  SFR-09:
+    name: "사용자 UI/UX 개편 및 홈페이지 탑재"
+    comply: 수용
+  SFR-10:
+    name: "데이터 관리 권한 체계"
+    comply: 수용
+  SFR-11:
+    name: "사용자 피드백 처리 체계"
+    comply: 수용
+  SFR-12:
+    name: "부서별 동의어·유의어 관리"
+    comply: 수용
+  SFR-13:
+    name: "답변 품질 유지 자동화"
+    comply: 수용
+  SFR-14:
+    name: "관리자 콘솔 고도화"
+    comply: 수용
+  SFR-15:
+    name: "통계 및 성과 모니터링 고도화"
+    comply: 수용
+  SFR-16:
+    name: "학생 개인 프로필 관리"
+    comply: 수용
+  SFR-17:
+    name: "개인별 RAG 지식공간 구축"
+    comply: 수용
+  SFR-18:
+    name: "개인 맥락 기반 검색·추천"
+    comply: 수용
+  SFR-19:
+    name: "온프레미스 LLM 구성 (조건부 과업)"
+    comply: 수용
+    note: "조건부 과업 — 검토 보고서는 필수 제출"
+  PER-01:
+    name: "시스템 목표성능"
+    comply: 수용
+  PER-02:
+    name: "자원 사용률"
+    comply: 수용
+  INR-01:
+    name: "체계연동"
+    comply: 수용
+  INR-02:
+    name: "상호운용성"
+    comply: 수용
+  INR-03:
+    name: "사용자 인터페이스"
+    comply: 수용
+  INR-04:
+    name: "학내 AI 서비스 연계 가능성"
+    comply: 수용
+  DAR-01:
+    name: "데이터 관리"
+    comply: 수용
+  DAR-02:
+    name: "데이터 품질 및 최신성 관리"
+    comply: 수용
+  DAR-03:
+    name: "백업 및 복구"
+    comply: 수용
+  TER-01:
+    name: "시험평가 일반"
+    comply: 수용
+  TER-02:
+    name: "시험평가 절차서"
+    comply: 수용
+  TER-03:
+    name: "시험평가 지원"
+    comply: 수용
+  SER-01:
+    name: "보안관리 일반"
+    comply: 수용
+  SER-02:
+    name: "데이터 보안"
+    comply: 수용
+  SER-03:
+    name: "SW 개발보안"
+    comply: 수용
+  SER-04:
+    name: "외부 LLM API 운영/보안"
+    comply: 수용
+  QUR-01:
+    name: "품질보증 일반"
+    comply: 수용
+  QUR-02:
+    name: "소프트웨어 품질"
+    comply: 수용
+  QUR-03:
+    name: "AI 답변 품질 검증"
+    comply: 수용
+  QUR-04:
+    name: "유지보수"
+    comply: 수용
+  COR-01:
+    name: "지식재산권 제약사항"
+    comply: 수용
+  COR-02:
+    name: "개발환경 및 과업범위 제약사항"
+    comply: 수용
+  COR-03:
+    name: "인프라 제공 범위 명확화"
+    comply: 수용
+    note: "보안 게이트웨이 · LLM API 이용료 부담 주체 【질의 확정】"
+  PMR-01:
+    name: "통합관리"
+    comply: 수용
+  PMR-02:
+    name: "일정관리"
+    comply: 수용
+  PMR-03:
+    name: "형상관리"
+    comply: 수용
+  PMR-04:
+    name: "의사소통관리"
+    comply: 수용
+  PSR-01:
+    name: "교육훈련"
+    comply: 수용
+  PSR-02:
+    name: "기술이전 및 지원"
+    comply: 수용
+  PSR-03:
+    name: "시범운영 및 안정화 지원"
+    comply: 수용
