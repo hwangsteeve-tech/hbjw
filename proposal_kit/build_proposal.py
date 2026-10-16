@@ -310,6 +310,14 @@ def build_divider(prs, ch):
     if shift:
         title.left += Cm(shift)
         title.width -= Cm(shift)
+    # 제목이 한 줄을 넘으면 아래 구분선 · 목차와 겹치므로 글자를 줄인다 (최소 18pt)
+    w = (Emu(title.width).cm - 0.5) * 0.88  # 실제 글꼴이 추정보다 넓어 여유를 둔다
+    for size in (36, 32, 28, 25, 22, 20, 18):
+        if _est_lines(ch["title"], size, w) <= 1:
+            break
+    if size != 36:
+        for r in title._element.iter(qn("a:rPr")):
+            r.set("sz", str(int(size * 100)))
     _replace_text(_shape_by_name(s, "TextBox 17"), f"{ch['num']}.")
     items = ch.get("toc") or []
     _replace_text(_shape_by_name(s, "TextBox 3"), items or [" "])
