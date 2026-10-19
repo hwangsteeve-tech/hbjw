@@ -27,7 +27,7 @@ CLIENT = "주식회사 동성아이텍"
 DATE = "2026년  11월  【  】일"
 ON, OFF = "■", "□"
 
-# [양식 1] 유사사업 수행실적 — 정성제안서 Ⅱ-3과 같은 목록. 회사 실적 목록의 사업명 · 기간 · 금액(원)을 그대로 옮김
+# [양식 1] 유사사업 수행실적 — 정성제안서 Ⅱ-3과 같은 목록. 회사 실적 목록의 사업명 · 기간 · 금액(원)을 그대로 옮기고, 양식에는 백만원 단위로 적음
 RECORDS = [
     ("AI 개발", "서울아산병원 AI-IDP (통합데이터플랫폼) 구축사업", "에스케이㈜", "2026.06.10~2027.11.27", "883,225,000", "수행중", "계약서 첨부"),
     ("AI 개발", "SK가스26년Trading AI 사업(PP)", "에스케이㈜", "2026.07.01~2026.07.24", "32,324,620", "완료", "실적증명서 첨부"),
@@ -137,6 +137,15 @@ def confirm(doc, text="상기 기재내용은 사실과 다름이 없음을 확�
     para(doc, f"{CLIENT} 귀하", 14, bold=True, align=WD_ALIGN_PARAGRAPH.CENTER)
 
 
+def mil(won):
+    """원 금액을 양식 단위(백만원)로 바꾼다. 반올림 없이 정확한 값 (예: 32,324,620 → 32.32462)."""
+    from decimal import Decimal
+    v = Decimal(won.replace(",", "")) / Decimal(1_000_000)
+    whole, _, frac = f"{v:f}".partition(".")
+    frac = frac.rstrip("0")
+    return f"{int(whole):,}" + (f".{frac}" if frac else "")
+
+
 def check(yes):
     return f"{ON} 해당  {OFF} 미해당" if yes is True else f"{OFF} 해당  {ON} 미해당" if yes is False else f"{OFF} 해당  {OFF} 미해당"
 
@@ -172,9 +181,9 @@ def build(out):
 
     # [양식 1]
     form_title(doc, 1, "유사사업 수행실적")
-    para(doc, "(단위: 원)", 9, align=WD_ALIGN_PARAGRAPH.RIGHT, after=2)
+    para(doc, "(단위: 백만원)", 9, align=WD_ALIGN_PARAGRAPH.RIGHT, after=2)
     table(doc, ["구분", "사업명", "발주처", "사업기간", "계약금액", "상태", "비고"],
-          [[*r[:3], r[3].replace("~", "~\n"), *r[4:]] for r in RECORDS], [1.8, 3.9, 1.8, 2.6, 2.6, 1.4, 2.6], size=8.5,
+          [[*r[:3], r[3].replace("~", "~\n"), mil(r[4]), *r[5:]] for r in RECORDS], [1.8, 3.9, 1.8, 2.6, 2.6, 1.4, 2.6], size=8.5,
           aligns="clcccc" + "c", row_h=0.85)
     note(doc, "※ 구분은 국가R&D, 지자체 실증, 공공분야 정책연구 등 해당 분야를 기재함.")
     note(doc, "※ 기재한 수행실적은 계약서, 실적증명서, 협약서, 결과통보서 등 객관적 증빙자료를 첨부하여야 하며, 미첨부 시 해당 실적은 가점 산정에서 제외함.")
