@@ -7,7 +7,7 @@
 # 빌드: python -m proposal_kit.build_proposal proposals/2026-11_sch-ai-medical-datacenter/content.yaml -o proposals/2026-11_sch-ai-medical-datacenter/sch_proposal.pptx --report
 
 meta:
-  doc_type: 기술제안서
+  doc_type: 정성제안서
   title_lines: [AI의료융합데이터센터, 플랫폼 구축 사업]
   pm_line: "사업PM 【성명】"
   org_lines:

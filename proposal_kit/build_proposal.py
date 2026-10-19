@@ -241,7 +241,7 @@ def _delete_slide(prs, index):
 def build_cover(prs, meta):
     s = _duplicate(prs, PROTO_COVER)
     title = _shape_by_name(s, "TextBox 5")
-    lines = [meta.get("doc_type", "정성제안서")] + list(meta["title_lines"])
+    lines = ["정성제안서"] + list(meta["title_lines"])  # 표지 문서명은 항상 정성제안서
     # 첫 줄(문서 종류)과 제목 줄은 서식이 달라서 문단을 각각 복제해 채운다
     txBody = title.text_frame._txBody
     paras = txBody.findall(qn("a:p"))

@@ -1,4 +1,4 @@
-# ㈜동성아이텍 「AI 기반 주차 수요예측·자동감면 서비스 개발 용역」 기술제안서
+# ㈜동성아이텍 「AI 기반 주차 수요예측·자동감면 서비스 개발 용역」 정성제안서
 # 공고 R26BK01774124-000 (기관 DS-2026-0916-0001) / 257,000,000원(VAT 별도) / 계약일부터 6개월 이내
 # 「디지털도로 AI 신기술 지원사업(AX Sprint)」 — 기존 탄력주차 플랫폼 · TS 연계 환경에 AI 기능 내재화
 # 제출: 2026-11-25 17:00 (나라장터 전자 + 이메일 master@flexparking.co.kr 병행 여부 확인), 서면평가
@@ -7,7 +7,7 @@
 # 빌드: python -m proposal_kit.build_proposal proposals/2026-11_dsit-parking-ai/content.yaml -o proposals/2026-11_dsit-parking-ai/dsit_proposal.pptx --report
 
 meta:
-  doc_type: 기술제안서
+  doc_type: 정성제안서
   title_lines: [AI 기반 주차 수요예측·, 자동감면 서비스 개발 용역]
   pm_line: "사업PM 【성명】"
   org_lines:

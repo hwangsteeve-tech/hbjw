@@ -1,10 +1,10 @@
-# 동국대학교 「AI기반 맞춤형 학습지원 서비스 운영 인프라 구축 사업자 선정」 기술제안서 초안
+# 동국대학교 「AI기반 맞춤형 학습지원 서비스 운영 인프라 구축 사업자 선정」 정성제안서 초안
 # 사전규격 R26BD00282810 / 제안서 제출 2026-10-27 12:00 (동국대 전자입찰) / 본문 30쪽 이내, 업체소개 20% 이내
 # 【 】 = 견적·제조사 확인 후 확정할 값 (모델명, 제조사 확약서, 협력 체계, 실적 등). 투입인력 성명은 빈칸 유지
 # 빌드: python -m proposal_kit.build_proposal proposals/2026-10_dgu-dadam-infra/content.yaml -o proposals/2026-10_dgu-dadam-infra/dgu_proposal.pptx --report
 
 meta:
-  doc_type: 기술제안서
+  doc_type: 정성제안서
   title_lines: [AI기반 맞춤형 학습지원 서비스, 운영 인프라 구축]
   pm_line: "사업PM 【성명】"
   org_lines:

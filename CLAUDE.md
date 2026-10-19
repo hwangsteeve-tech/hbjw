@@ -5,6 +5,7 @@
 
 ## 제안서 작성 규칙
 
+- 표지 문서명은 기술제안서가 아니라 항상 `정성제안서`로 표시한다 (build_proposal.py에서 고정).
 - 정성제안서는 항상 `proposal_kit`의 H9 양식(세로 A4, templates/h9_base.pptx)으로 PPT 파일을 만든다.
   형식 기준은 `proposal_kit/reference/`의 실제 제출본 예시를 따른다.
 - 사업별 내용은 `proposals/<연월>_<사업명>/content.yaml`에 작성하고

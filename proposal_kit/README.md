@@ -26,7 +26,7 @@ python -m proposal_kit.build_proposal proposals/2026-10_pnu-ai-platform/content.
 
 ```yaml
 meta:
-  doc_type: 정성제안서
+  doc_type: 정성제안서            # 표지 문서명 (항상 정성제안서로 고정)
   title_lines: [AI 기반 지역혁신, 데이터 플랫폼 구축]   # 표지 제목 (줄 단위)
   pm_line: 사업PM 홍길동 파트너
   org_lines: ["주관기관: 에이치나인", "참여기관: ○○"]
