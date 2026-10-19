@@ -874,8 +874,9 @@ def _table(slide, x, y, w, rows, widths, size=9, row_h=None, heights=None, merge
     return gf
 
 
-def _chapter_page_no(slide, label):
-    """레이아웃의 연속 쪽번호를 가리고 하단 중앙에 쪽번호(장별 Ⅲ-5 또는 본문 연속 5)를 넣는다."""
+def _page_no(slide, label):
+    """레이아웃의 쪽번호를 가리고 하단 중앙에 전체 쪽번호(표지부터 센 문서 쪽수)를 넣는다.
+    정성제안서는 장별 쪽번호(Ⅲ-5)를 쓰지 않는다."""
     _shape(slide, "RECTANGLE", 8.3, 26.75, 2.45, 0.75, fill="FFFFFF")
     tb = _text_box(slide, 7.5, 26.8, 4.05, 0.65, anchor="m")
     par = tb.text_frame.paragraphs[0]
@@ -926,22 +927,13 @@ def build(content_path: Path, out_path: Path, template: Path = BASE_TEMPLATE, re
     req_extra = max(0, -(-n_ids // 44) - 1) if req_slide is not None else 0
     req_pages: dict[str, list] = {}
     fill = []
-    numbering = data.get("page_numbering")
-    by_chapter = numbering == "chapter"
-    n_body = 0
     for ch in chapters:
         ch.setdefault("toc", [])
         build_divider(prs, ch)
         for k, spec in enumerate(ch.get("slides", []), start=1):
             body = _render_body(prs, ch, spec, auto_fit=data.get("auto_fit", True))
             page = len(prs.slides) - n_proto + req_extra
-            n_body += 1
-            if by_chapter:
-                page = f"{ch['num']}-{k}"
-                _chapter_page_no(body.s, page)
-            elif numbering == "body":
-                page = n_body
-                _chapter_page_no(body.s, str(page))
+            _page_no(body.s, str(page))
             fill.append((page, spec.get("h3") or spec.get("h2"), (body.y - Y_START) / (Y_END - Y_START)))
             for rid in re.split(r"[,\s]+", spec.get("req", "") or ""):
                 if rid:

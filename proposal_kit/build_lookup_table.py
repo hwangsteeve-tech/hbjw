@@ -35,7 +35,6 @@ def slide_pages(content: dict):
         page += max(1, -(-n_ids // 44))
     page += 1  # 목차
     out = []
-    by_chapter = content.get("page_numbering") == "chapter"
     for ch in content["chapters"]:
         page += 1  # 간지
         for k, spec in enumerate(ch.get("slides", []), start=1):
@@ -43,17 +42,11 @@ def slide_pages(content: dict):
             ids = [r for r in re.split(r"[,\s]+", spec.get("req") or "") if r]
             out.append({"chapter": ch["num"], "chapter_title": ch.get("title", ""), "header": spec.get("header", ""),
                         "h3": spec.get("h3") or spec.get("h2", ""), "ids": ids,
-                        "page": (ch["num"], k) if by_chapter else page})
+                        "page": page})
     return out
 
 
 def _pages_text(pages):
-    if pages and isinstance(pages[0], tuple):  # 장별 쪽번호 (장, 쪽)
-        out = []
-        for ch in dict.fromkeys(c for c, _ in pages):
-            nums = sorted({n for c, n in pages if c == ch})
-            out.append(f"{ch}-" + _pages_text(nums).replace(", ", f", {ch}-").replace("~", f"~{ch}-"))
-        return ", ".join(out)
     pages = sorted(set(pages))
     if not pages:
         return "-"
