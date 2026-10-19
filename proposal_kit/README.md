@@ -32,6 +32,7 @@ meta:
   org_lines: ["주관기관: 에이치나인", "참여기관: ○○"]
 
 req_table: true                 # false면 요구사항 분석표 슬라이드를 넣지 않음
+page_numbering: body            # 하단 쪽번호: body(본문만 1부터 연속) · chapter(장별 Ⅲ-5) · 생략 시 레이아웃 연속번호
 req_categories:                 # 요구사항 분석표 (본문 req 필드에서 쪽수를 자동 계산)
   - {name: 기능, ids: [FUR-001, FUR-002]}
 req_compliance: lookup_spec.yaml  # (선택) 지정하면 분석표가 '요구사항 대비 수용여부 조견표'가 됨
