@@ -13,7 +13,8 @@
   `python -m proposal_kit.build_proposal <content.yaml> -o <출력.pptx> --report`로 빌드한다.
 - 목차는 해당 RFP의 "제안서 작성 목차(권고)"와 기술평가 항목을 따르고, 본문 슬라이드마다 요구사항 ID(`req`)를 단다.
 - 회사 고유 정보(실적·인력·신용등급·인증)는 확인되지 않으면 `【 】`로 남기고 지어내지 않는다.
-- 일반현황·연혁·자본금 및 매출액(최근 3년)은 `proposal_kit/company/h9_company.yaml`이 기준이다.
+- 일반현황·연혁·자본금 및 매출액(최근 3년)·보유 자격(조달청 등록업종·직접생산증명)은 `proposal_kit/company/h9_company.yaml`이 기준이다.
+  사용자가 새 등록 정보를 주면 이 파일을 바로 고쳐 저장하고, 제안서의 보유 자격 칸은 이 목록과 맞춘다.
   제안서에는 직접 쓰지 말고 `include: company.general` / `company.history` / `company.finance` 슬라이드로 불러온다.
 - 글꼴은 어느 PC에서나 보이는 `맑은 고딕`으로 저장한다 (proposal_kit/style.py가 저장 직전에 일괄 적용).
 - 작성자가 채울 빈칸은 `【 】`로 쓰며, 빌드 시 붉은색 굵은 글씨로 표시된다. 빈 표 칸도 `""` 대신 `【성명】`처럼 쓴다.
