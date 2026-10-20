@@ -1,0 +1,263 @@
+format: compliance
+proposer: 주식회사 에이치나인
+title: "[별지 1호] 제안요청 준수표 (AI 디지털노동위원회 구축 2차 사업)"
+columns:
+- 요구사항 고유번호
+- 제안요청내용 (요구사항 명칭)
+- 제안내용 (제안서 목차)
+- 제안서 쪽
+- 수용 여부
+- 비고
+requirements:
+  CSR-001:
+    name: "AI 디지털노동위원회 고도화 방안 마련"
+    comply: 수용
+  ECR-001:
+    name: "소프트웨어 도입"
+    comply: 수용
+  SFR-001:
+    name: "기본 구축 방향"
+    comply: 수용
+  SFR-002:
+    name: "공통 보안 요구사항"
+    comply: 수용
+  SFR-003:
+    name: "전자송달 기능 확대 및 개선"
+    comply: 수용
+  SFR-004:
+    name: "중복·유사사건 사전 검증·조회"
+    comply: 수용
+  SFR-005:
+    name: "사건처리 자동화"
+    comply: 수용
+  SFR-006:
+    name: "조정사건 처리 기능 개선"
+    comply: 수용
+  SFR-007:
+    name: "정보연계"
+    comply: 수용
+  SFR-008:
+    name: "업무 편의 기능 신설"
+    comply: 수용
+  SFR-009:
+    name: "통계 기능 강화"
+    comply: 수용
+  SFR-010:
+    name: "전자결재"
+    comply: 수용
+  SFR-011:
+    name: "사건 기록관리"
+    comply: 수용
+  SFR-012:
+    name: "전자우편(e-그린 서비스) 고도화"
+    comply: 수용
+  SFR-013:
+    name: "위원 사용 편의성 개선"
+    comply: 수용
+  SFR-014:
+    name: "온라인 사건신청 항목 정비"
+    comply: 수용
+  SFR-015:
+    name: "유형별 이유서 작성 예시 및 체크리스트 고도화"
+    comply: 수용
+  SFR-016:
+    name: "홈페이지 및 온라인사건신청"
+    comply: 수용
+  SFR-017:
+    name: "문서초안 작성을 위한 Graph DB 기반 지식그래프"
+    comply: 수용
+  SFR-018:
+    name: "AI 기반 직권조사 계획서 작성"
+    comply: 수용
+  SFR-019:
+    name: "판정서 정보ㆍ인용 오류 검증"
+    comply: 수용
+  SFR-020:
+    name: "비정형 문서 전처리 및 구조 분석"
+    comply: 수용
+  SFR-021:
+    name: "언어모델 성능 고도화"
+    comply: 수용
+  SFR-022:
+    name: "문서초안 작성 기능 확대"
+    comply: 수용
+  SFR-023:
+    name: "참조문서 관리체계 구축"
+    comply: 수용
+  SFR-024:
+    name: "AI 사건신청 및 조회서비스 구축"
+    comply: 수용
+  SFR-025:
+    name: "AI 기반 화해 업무 지원 기능"
+    comply: 수용
+  SFR-026:
+    name: "AI 기반 조정 업무 지원 기능"
+    comply: 수용
+  SFR-027:
+    name: "음성 자료에 대한 분석 기능 고도화"
+    comply: 수용
+  SFR-028:
+    name: "AI 기반 소송문서 작성 지원"
+    comply: 수용
+  SFR-029:
+    name: "판정서 기반 내부 지식 위키 구축"
+    comply: 수용
+  PER-001:
+    name: "성능 일반"
+    comply: 수용
+  PER-002:
+    name: "질의 응답 시간"
+    comply: 수용
+  PER-003:
+    name: "대용량 첨부파일 AI 처리성능"
+    comply: 수용
+  PER-004:
+    name: "동시 사용자 및 처리 능력"
+    comply: 수용
+  PER-005:
+    name: "성능 안정화"
+    comply: 수용
+  SIR-001:
+    name: "사용자 인터페이스 및 디자인"
+    comply: 수용
+  SIR-002:
+    name: "반응형 웹"
+    comply: 수용
+  SIR-003:
+    name: "내ㆍ외부 시스템 연계"
+    comply: 수용
+  DAR-001:
+    name: "데이터 요구사항 수행기준"
+    comply: 수용
+  DAR-002:
+    name: "데이터보안 관리"
+    comply: 수용
+  DAR-003:
+    name: "데이터 구조 설계"
+    comply: 수용
+  DAR-004:
+    name: "데이터 표준관리"
+    comply: 수용
+  DAR-005:
+    name: "데이터 검증"
+    comply: 수용
+  DAR-006:
+    name: "데이터 관리체계 수립"
+    comply: 수용
+  DAR-007:
+    name: "데이터 품질관리"
+    comply: 수용
+  DAR-008:
+    name: "데이터 개방 및 메타데이터 관리체계"
+    comply: 수용
+  TER-001:
+    name: "테스트 계획 수립 및 일반 요구사항"
+    comply: 수용
+  TER-002:
+    name: "단위 테스트"
+    comply: 수용
+  TER-003:
+    name: "통합 테스트"
+    comply: 수용
+  TER-004:
+    name: "성능 테스트"
+    comply: 수용
+  TER-005:
+    name: "인수 테스트"
+    comply: 수용
+  TER-006:
+    name: "시험운영 및 안정화"
+    comply: 수용
+  SER-001:
+    name: "시큐어 코딩 준수사항"
+    comply: 수용
+  SER-002:
+    name: "DB 암호화 적용"
+    comply: 수용
+  SER-003:
+    name: "보안취약점 진단 및 이행점검"
+    comply: 수용
+  SER-004:
+    name: "보안 준수 및 보안정책 위반에 대한 조치"
+    comply: 수용
+  SER-005:
+    name: "AI 기술 보안 요구사항"
+    comply: 수용
+  QUR-001:
+    name: "품질보증 및 관리 일반"
+    comply: 수용
+  QUR-002:
+    name: "구축시스템 품질 요건"
+    comply: 수용
+  QUR-003:
+    name: "유지보수 방안"
+    comply: 수용
+  COR-001:
+    name: "표준 및 지침 준수"
+    comply: 수용
+  COR-002:
+    name: "감리 대응"
+    comply: 수용
+  COR-003:
+    name: "기술적용계획표 및 결과표"
+    comply: 수용
+  COR-004:
+    name: "웹 접근성 및 호환성"
+    comply: 수용
+  COR-005:
+    name: "표준 프레임워크 및 개발언어 적용"
+    comply: 수용
+  COR-006:
+    name: "손해배상 책임"
+    comply: 수용
+  COR-007:
+    name: "지식재산권 및 저작권"
+    comply: 수용
+  PMR-001:
+    name: "사업관리자(PM)"
+    comply: 수용
+  PMR-002:
+    name: "공통수급형태의 제안"
+    comply: 수용
+  PMR-003:
+    name: "하도급 관리 방안"
+    comply: 수용
+  PMR-004:
+    name: "일정계획"
+    comply: 수용
+  PMR-005:
+    name: "위험관리"
+    comply: 수용
+  PMR-006:
+    name: "보고관리"
+    comply: 수용
+  PMR-007:
+    name: "산출물 관리"
+    comply: 수용
+  PMR-008:
+    name: "검사"
+    comply: 수용
+  PMR-009:
+    name: "안전보건"
+    comply: 수용
+  PSR-001:
+    name: "하자보수 일반"
+    comply: 수용
+  PSR-002:
+    name: "교육훈련 일반"
+    comply: 수용
+  PSR-003:
+    name: "기술지원"
+    comply: 수용
+  PSR-004:
+    name: "홍보지원 방안"
+    comply: 수용
+  PSR-005:
+    name: "SW 사업정보 제출"
+    comply: 수용
+  PSR-006:
+    name: "세미나 및 워크숍"
+    comply: 수용
+  PSR-007:
+    name: "작업장소"
+    comply: 수용
