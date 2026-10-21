@@ -1,0 +1,398 @@
+format: compliance
+proposer: 주식회사 에이치나인
+title: 요구사항 대비 수용여부 조견표 (전남대학교 AI 기반 지능형 플랫폼(e클래스2.0) 구축)
+columns: [요구사항 고유번호, 요구사항 명칭, 제안서 목차, 쪽수, 수용 여부, 비고]
+requirements:
+  ECR-001:
+    name: "요구명칭"
+    comply: 수용
+  ECR-002:
+    name: "요구명칭"
+    comply: 수용
+  ECR-003:
+    name: "요구명칭"
+    comply: 수용
+  SFR-001:
+    name: "표준 준수"
+    comply: 수용
+  SFR-002:
+    name: "반응형 웹 설계·구현"
+    comply: 수용
+  SFR-003:
+    name: "학사행정시스템, 전자출결시스템, 화상강의 연동"
+    comply: 수용
+  SFR-004:
+    name: "다양한 교육과정 지원"
+    comply: 수용
+  SFR-005:
+    name: "통합 인증 체계 구축"
+    comply: 수용
+  SFR-006:
+    name: "기간(기운영)시스템 연계방안"
+    comply: 수용
+  SFR-007:
+    name: "다국어 지원"
+    comply: 수용
+  SFR-008:
+    name: "데이터 이관 방안"
+    comply: 수용
+  SFR-009:
+    name: "모바일 환경 지원"
+    comply: 수용
+  SFR-010:
+    name: "스마트 출석관리 및 온라인 출결조회"
+    comply: 수용
+  SFR-011:
+    name: "편리한 파일 업로드"
+    comply: 수용
+  SFR-012:
+    name: "일정 관리 기능 및 알람 서비스 제공"
+    comply: 수용
+  SFR-013:
+    name: "웹 에디터 기능 제공"
+    comply: 수용
+  SFR-014:
+    name: "설문조사 관리"
+    comply: 수용
+  SFR-015:
+    name: "원격수업 운영지침에따른 콘텐츠 학습분량 점검기능"
+    comply: 수용
+  SFR-016:
+    name: "원격수업 운영지침에따른 대리출석 방지기능"
+    comply: 수용
+  SFR-017:
+    name: "유니버설 디자인 적용 (Universal Design)"
+    comply: 수용
+  SFR-018:
+    name: "분반 동기화 관리"
+    comply: 수용
+  SFR-019:
+    name: "합반 관리"
+    comply: 수용
+  SFR-020:
+    name: "(교수자) 교수학습 관리"
+    comply: 수용
+  SFR-021:
+    name: "(교수자) 코스설계 기능"
+    comply: 수용
+  SFR-022:
+    name: "(교수자) 강의 설문"
+    comply: 수용
+  SFR-023:
+    name: "(교수자) 시험관리"
+    comply: 수용
+  SFR-024:
+    name: "(교수자) 실시간 수업 서비스"
+    comply: 수용
+  SFR-025:
+    name: "(교수자) 수업조교/청강 신청"
+    comply: 수용
+  SFR-026:
+    name: "(교수자) 외부 콘텐츠 탑재"
+    comply: 수용
+  SFR-027:
+    name: "(교수자) 자기/동료 평가 기능"
+    comply: 수용
+  SFR-028:
+    name: "(교수자) 수강생 관리"
+    comply: 수용
+  SFR-029:
+    name: "(교수자) 수강생 독려 기능"
+    comply: 수용
+  SFR-030:
+    name: "(교수자) 강좌 관리 기능"
+    comply: 수용
+  SFR-031:
+    name: "(교수자) 출석 관리 기능"
+    comply: 수용
+  SFR-032:
+    name: "(교수자) 성적 관리 기능"
+    comply: 수용
+  SFR-033:
+    name: "(교수자) 학습 진도 관리"
+    comply: 수용
+  SFR-034:
+    name: "(교수자) 강좌백업&복구&이전 복사"
+    comply: 수용
+  SFR-035:
+    name: "(교수자) 과제 관리 기능"
+    comply: 수용
+  SFR-036:
+    name: "(교수자) 팀 프로젝트 관리"
+    comply: 수용
+  SFR-037:
+    name: "(교수자) 학습활동 기능"
+    comply: 수용
+  SFR-038:
+    name: "(교수자) 강의자료 관리"
+    comply: 수용
+  SFR-039:
+    name: "(교수자) 게시판 관리"
+    comply: 수용
+  SFR-040:
+    name: "(학습자) 메인 페이지 구성"
+    comply: 수용
+  SFR-041:
+    name: "(학습자) 학습현황 관리"
+    comply: 수용
+  SFR-042:
+    name: "(학습자) 게시판 관리"
+    comply: 수용
+  SFR-043:
+    name: "(학습자) 설문조사 기능"
+    comply: 수용
+  SFR-044:
+    name: "(학습자) 팀 프로젝트 기능"
+    comply: 수용
+  SFR-045:
+    name: "(학습자) 시험 기능"
+    comply: 수용
+  SFR-046:
+    name: "(학습자) 과제 기능"
+    comply: 수용
+  SFR-047:
+    name: "(학습자) 수업 기능"
+    comply: 수용
+  SFR-048:
+    name: "(학습자) 동영상 기능"
+    comply: 수용
+  SFR-049:
+    name: "(학습자) 실시간 수업 기능"
+    comply: 수용
+  SFR-050:
+    name: "(관리자) 통합학사연동 관리"
+    comply: 수용
+  SFR-051:
+    name: "(관리자) 사용자 관리"
+    comply: 수용
+  SFR-052:
+    name: "(관리자) 강좌 관리"
+    comply: 수용
+  SFR-053:
+    name: "(관리자) 콘텐츠 관리"
+    comply: 수용
+  SFR-054:
+    name: "(관리자) 통계 관리"
+    comply: 수용
+  SFR-055:
+    name: "(관리자) 시스템 모니터링"
+    comply: 수용
+  SFR-056:
+    name: "(관리자) KOCW 연계 관리"
+    comply: 수용
+  SFR-057:
+    name: "(관리자) 시스템 접속현황 조회"
+    comply: 수용
+  SFR-058:
+    name: "(관리자) 팝업관리"
+    comply: 수용
+  SFR-059:
+    name: "(MOOC) 관리자 기능"
+    comply: 수용
+  SFR-060:
+    name: "(MOOC) 운영자 기능"
+    comply: 수용
+  SFR-061:
+    name: "(MOOC) 학습자 기능"
+    comply: 수용
+  SFR-062:
+    name: "외부시스템연계 – CDN"
+    comply: 수용
+  SFR-063:
+    name: "동영상 학습관리"
+    comply: 수용
+  SFR-064:
+    name: "비학위과정 관리기능"
+    comply: 수용
+  SFR-065:
+    name: "역할별 대시보드"
+    comply: 수용
+  SFR-066:
+    name: "차시단위 강의실 설계"
+    comply: 수용
+  SFR-067:
+    name: "수업만족도 조사"
+    comply: 수용
+  SFR-068:
+    name: "스마트 출석 관리(온/오프라인 통합)"
+    comply: 수용
+  SFR-069:
+    name: "모바일 지원"
+    comply: 수용
+  SFR-070:
+    name: "개인 메시지 기능(DM)"
+    comply: 수용
+  SFR-071:
+    name: "개인화된 실시간 알람 발송"
+    comply: 수용
+  SFR-072:
+    name: "실시간 화상 강의 기능"
+    comply: 수용
+  SFR-073:
+    name: "AI 자동자막"
+    comply: 수용
+  SFR-074:
+    name: "AI 기반 자동 퀴즈생성 및 평가"
+    comply: 수용
+  SFR-075:
+    name: "AI 코스워크 관리"
+    comply: 수용
+  SFR-076:
+    name: "AI 문서뷰어"
+    comply: 수용
+  SFR-077:
+    name: "AI 실시간 자막 및 번역"
+    comply: 수용
+  SFR-078:
+    name: "학습 모니터링 및 학습분석"
+    comply: 수용
+  SFR-079:
+    name: "AI 기반 과제 및 제출형 학습활동"
+    comply: 수용
+  SFR-080:
+    name: "AI 기반의 상호작용 학습활동"
+    comply: 수용
+  SFR-081:
+    name: "제출 학습활동(과제)"
+    comply: 수용
+  SFR-082:
+    name: "AI 튜터"
+    comply: 수용
+  SFR-083:
+    name: "AI Q&A 지원"
+    comply: 수용
+  SFR-084:
+    name: "AI 요약 및 번역"
+    comply: 수용
+  SFR-085:
+    name: "AI 문제출제 및 추천"
+    comply: 수용
+  SFR-086:
+    name: "AI 개인화 서비스"
+    comply: 수용
+  SFR-087:
+    name: "AI LLM 관리"
+    comply: 수용
+  SFR-088:
+    name: "스마트출석부(온오프라인 출결관리)"
+    comply: 수용
+  SFR-089:
+    name: "온라인시험 부정 행위 방지 기능 제공"
+    comply: 수용
+  SFR-090:
+    name: "(학생) 포털 대시보드"
+    comply: 수용
+  SFR-091:
+    name: "(교수자) 포털 대시보드"
+    comply: 수용
+  SFR-092:
+    name: "성장마루(비교과 통합관리 시스템) UI/UX 고도화 및 시스템 통합"
+    comply: 수용
+  PER-001:
+    name: "성능 일반"
+    comply: 수용
+  PER-002:
+    name: "오류 응답시간"
+    comply: 수용
+  SIR-001:
+    name: "디자인 요구사항"
+    comply: 수용
+  SIR-002:
+    name: "메시지 제공"
+    comply: 수용
+  DAR-001:
+    name: "데이터 표준화 기준 준수"
+    comply: 수용
+  DAR-002:
+    name: "데이터 관리"
+    comply: 수용
+  DAR-003:
+    name: "데이터 이행 테스트 데이터 구축"
+    comply: 수용
+  DAR-004:
+    name: "최적의 데이터 이행 방안 마련"
+    comply: 수용
+  DAR-005:
+    name: "백업요구사항"
+    comply: 수용
+  DAR-006:
+    name: "SQL튜닝요구사항"
+    comply: 수용
+  TER-001:
+    name: "테스트 요구 일반사항"
+    comply: 수용
+  SER-001:
+    name: "관리자로그인 보안조치"
+    comply: 수용
+  SER-002:
+    name: "사용자 인증정보 보호"
+    comply: 수용
+  SER-003:
+    name: "개인정보 보호"
+    comply: 수용
+  SER-004:
+    name: "페이지 보안"
+    comply: 수용
+  SER-005:
+    name: "구간 암호화"
+    comply: 수용
+  SER-006:
+    name: "보안규정 및 지침 준수"
+    comply: 수용
+  SER-007:
+    name: "취약점 점검 수행 및 점검 보고서 제출"
+    comply: 수용
+  SER-008:
+    name: "응용 시스템 보안"
+    comply: 수용
+  SER-009:
+    name: "데이터 보안"
+    comply: 수용
+  QUR-001:
+    name: "가용성 보장"
+    comply: 수용
+  QUR-002:
+    name: "장애 대응을 위한 백업절차 마련"
+    comply: 수용
+  QUR-003:
+    name: "유지보수 방안"
+    comply: 수용
+  COR-001:
+    name: "개인정보보호법 준수"
+    comply: 수용
+  COR-002:
+    name: "웹표준 및 호환성 준수"
+    comply: 수용
+  COR-003:
+    name: "개발관련 지침 준수"
+    comply: 수용
+  COR-004:
+    name: "저작권 및 지적재산권 보호"
+    comply: 수용
+  COR-005:
+    name: "모듈화 설계 및 개발 표준화"
+    comply: 수용
+  PMR-001:
+    name: "사업수행 조직 구성"
+    comply: 수용
+  PMR-002:
+    name: "검수 및 산출물 관리"
+    comply: 수용
+  PMR-003:
+    name: "보안관리 및 보안지침"
+    comply: 수용
+  PMR-004:
+    name: "참여인원 보안"
+    comply: 수용
+  PSR-001:
+    name: "하자보수 지원"
+    comply: 수용
+  PSR-002:
+    name: "하자보수"
+    comply: 수용
+  PSR-003:
+    name: "기술이전 지원 및 교육"
+    comply: 수용
+  PSR-004:
+    name: "사용자 교육 및 매뉴얼 지원"
+    comply: 수용

@@ -1,0 +1,73 @@
+format: evaluation
+proposer: 주식회사 에이치나인
+title: 기술성 평가항목 조견표 (전남대학교 AI 기반 지능형 플랫폼(e클래스2.0) 구축)
+rfp_ref_header: RFP 위치
+evaluation:
+- item: "경영상태"
+  group: "정량평가"
+  score: 5
+  rows:
+  - {chapter: "Ⅰ", header: "1. 제안사 일반 현황", h3: ['1.2'], label: "정량평가", rfp_page: "[붙임1] · [붙임2]", rfp_text: "제안사의 신용평가 등급 확인 (정량적 제안서 별도 제출)"}
+- item: "사업이해도 및 추진전략"
+  group: "전략 및 방법론"
+  score: 10
+  rows:
+  - {chapter: "Ⅱ", header: "1. 사업이해도", h3: [], label: "사업이해도", rfp_page: "[붙임1] 전략 및 방법론", rfp_text: "사업 특성 · 목표, 주변 환경 · 업무 연관관계 이해, 일관된 방향과 전략"}
+  - {chapter: "Ⅱ", header: "2. 추진 전략", h3: [], label: "추진전략", rfp_page: "[붙임1] 전략 및 방법론", rfp_text: "위험 요소를 고려한 창의적이고 타당한 대안"}
+- item: "적용기술 및 개발 방법론"
+  group: "전략 및 방법론"
+  score: 10
+  rows:
+  - {chapter: "Ⅱ", header: "3. 적용 기술", h3: [], label: "적용기술", rfp_page: "[붙임1] 전략 및 방법론", rfp_text: "확장성을 고려한 실현 가능한 적용 기술"}
+  - {chapter: "Ⅱ", header: "4. 개발방법론", h3: [], label: "개발방법론", rfp_page: "[붙임1] 전략 및 방법론", rfp_text: "방법론 타당성, 적용 사례 · 경험, 단계별 활동 · 산출물"}
+- item: "시스템 장비구성"
+  group: "기술 및 기능"
+  score: 10
+  rows:
+  - {chapter: "Ⅲ", header: "1. 시스템 장비 구성", h3: [], label: "시스템 장비구성", rfp_page: "[붙임1] 기술 및 기능", rfp_text: "요구 규격 충족 장비, 현 시스템 인터페이스 · 확장성, 운영 · 유지관리 방안"}
+- item: "기능 및 보안 요구사항"
+  group: "기술 및 기능"
+  score: 10
+  rows:
+  - {chapter: "Ⅲ", header: "2. 기능 요구사항", h3: [], label: "기능", rfp_page: "[붙임1] 기술 및 기능", rfp_text: "방법론 · 분석도구로 구체적 분석, 구현 방안 · 적용 가능성"}
+  - {chapter: "Ⅲ", header: "3. 보안 요구사항", h3: [], label: "보안", rfp_page: "[붙임1] 기술 및 기능", rfp_text: "적용 표준 · 구현 방안의 설계단계 반영"}
+- item: "데이터 요구사항 및 제약사항"
+  group: "기술 및 기능"
+  score: 5
+  rows:
+  - {chapter: "Ⅲ", header: "4. 데이터 요구사항", h3: [], label: "데이터", rfp_page: "[붙임1] 기술 및 기능", rfp_text: "데이터 전환 계획 · 검증 방법 · 에러 데이터 처리"}
+  - {chapter: "Ⅲ", header: "5. 제약사항", h3: [], label: "제약사항", rfp_page: "[붙임1] 기술 및 기능", rfp_text: "제약사항 충족 구현 방안 · 테스트 방안"}
+- item: "성능 요구사항"
+  group: "성능 및 품질"
+  score: 10
+  rows:
+  - {chapter: "Ⅳ", header: "1. 성능 요구사항", h3: [], label: "성능", rfp_page: "[붙임1] 성능 및 품질", rfp_text: "요구 성능 충족을 위한 분석 · 구현 · 테스트 방안"}
+- item: "인터페이스 요구사항"
+  group: "성능 및 품질"
+  score: 5
+  rows:
+  - {chapter: "Ⅳ", header: "2. 인터페이스 요구사항", h3: [], label: "인터페이스", rfp_page: "[붙임1] 성능 및 품질", rfp_text: "연계 방안 장단점 분석 · 최적안, 사용자 인터페이스 분석 · 설계 · 검토"}
+- item: "관리방법론 및 일정계획"
+  group: "프로젝트 관리"
+  score: 10
+  rows:
+  - {chapter: "Ⅴ", header: "1. 관리방법론", h3: [], label: "관리방법론", rfp_page: "[붙임1] 프로젝트 관리", rfp_text: "위험 · 진도 · 보안 · 형상 · 문서 관리 방법"}
+  - {chapter: "Ⅴ", header: "2. 일정계획", h3: [], label: "일정계획", rfp_page: "[붙임1] 프로젝트 관리", rfp_text: "활동기간 산정 · 배열, 중간목표, 자원 할당"}
+- item: "시험운영 및 교육훈련"
+  group: "프로젝트 지원"
+  score: 5
+  rows:
+  - {chapter: "Ⅵ", header: "1. 품질보증", h3: [], label: "품질보증", rfp_page: "[붙임1] 프로젝트 지원", rfp_text: "품질보증 조직 · 방법 · 절차"}
+  - {chapter: "Ⅵ", header: "2. 시험운영", h3: [], label: "시험운영", rfp_page: "[붙임1] 프로젝트 지원", rfp_text: "시험 운영 방법 및 조직"}
+  - {chapter: "Ⅵ", header: "3. 교육훈련", h3: [], label: "교육훈련", rfp_page: "[붙임1] 프로젝트 지원", rfp_text: "운영 · 관리자 교육훈련 방법 · 내용"}
+- item: "유지보수 및 기밀보안"
+  group: "프로젝트 지원"
+  score: 5
+  rows:
+  - {chapter: "Ⅵ", header: "4. 유지보수", h3: [], label: "유지보수", rfp_page: "[붙임1] 프로젝트 지원", rfp_text: "하자보수 · 유지보수 계획 · 절차 · 범위 · 기간"}
+  - {chapter: "Ⅵ", header: "5. 기밀보안", h3: [], label: "기밀보안", rfp_page: "[붙임1] 프로젝트 지원", rfp_text: "기밀 보호 체계 및 대책"}
+- item: "비상 대책"
+  group: "프로젝트 지원"
+  score: 5
+  rows:
+  - {chapter: "Ⅵ", header: "6. 비상대책", h3: [], label: "비상대책", rfp_page: "[붙임1] 프로젝트 지원", rfp_text: "백업 · 복구 및 장애대응 대책"}
