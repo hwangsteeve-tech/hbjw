@@ -67,3 +67,32 @@ finance:
   debt_ratio: ["104.7%", "75.3%", "71.8%"]
   current_ratio: ["102.4%", "157.9%", "149.7%"]
   net_margin: ["5.6%", "9.4%", "5.6%"]
+
+# 사업수행실적 대장 — 제안서 실적 표의 기준 (사용자 제공 「2. 수행 실적 (에이치나인 1/2 · 2/2)」, 2026-10-21)
+# 항상 최근 계약일(사업 시작일)이 위에 오도록 내림차순으로 유지한다. 새 실적을 받으면 이 목록에 바로 추가한다.
+# amount: 계약금액(원) / kind: AI · 구축 · 디자인기획 · 운영 · 유지보수 / status는 2026-10-21 기준
+# 공고별 인정 여부(예: 운영·유지보수 불인정)는 각 제안서에서 판단해 고른다.
+records:
+  - {name: "SK가스26년Trading AI 사업(PP)", start: 2026.07.01, end: 2026.07.24, amount: 32324620, client: "에스케이㈜", kind: AI, status: 완료}
+  - {name: "SKHy '26년 표준 아키텍처 구축 Ph3", start: 2026.07.01, end: 2026.12.31, amount: 1107180000, client: "에스케이㈜", kind: 구축, status: 수행중, note: "인하대·순천향대 제안서 기준"}
+  - {name: "서울아산병원 AI-IDP (통합데이터플랫폼) 구축사업", start: 2026.06.10, end: 2027.11.27, amount: 883225000, client: "에스케이㈜", kind: AI, status: 수행중, note: "동성아이텍 제출양식 기준"}
+  - {name: "SKHy '26년 용인 Y1(M17) 제조 DT 시스템 Ph1_FAB MOS_원가선투입", start: 2026.05.01, end: 2026.06.30, amount: 38006760, client: "에스케이㈜", kind: 구축, status: 완료}
+  - {name: "Trading AI Agent 개발 및 ML/DL 분석_선투입", start: 2026.04.08, end: 2026.06.30, amount: 129385380, client: "에스케이㈜", kind: AI, status: 완료}
+  - {name: "SKHy '26년 M14 차세대 제조 시스템 확산_FABMOS_원가선투입", start: 2026.03.16, end: 2026.06.30, amount: 32853200, client: "에스케이㈜", kind: 구축, status: 완료}
+  - {name: "SKHy '26년 M15X Ph4 차세대 제조 시스템 _FAB MOS", start: 2026.03.01, end: 2026.06.30, amount: 27440000, client: "에스케이㈜", kind: 구축, status: 완료}
+  - {name: "SKHy '26년 표준 아키텍처 구축 Ph3 원가선투입", start: 2026.01.19, end: 2026.06.30, amount: 1170490000, client: "에스케이㈜", kind: 구축, status: 완료}
+  - {name: "LG LIFE 및 그룹 홈페이지 사이트 운영", start: 2026.01.01, end: 2026.12.31, amount: 661298000, client: "㈜엘지씨엔에스", kind: 운영, status: 수행중}
+  - {name: "26년 Cello Square 플랫폼 UX기획 및 디자인", start: 2026.01.01, end: 2026.12.31, amount: 928320000, client: "삼성에스디에스㈜", kind: 디자인기획, status: 수행중}
+  - {name: "중진공 전용 플랫폼 CX 기획", start: 2025.10.01, end: 2026.01.22, amount: 180000000, client: "삼성에스디에스㈜", kind: 디자인기획, status: 완료}
+  - {name: "경기 컬처패스 플랫폼 운영", start: 2025.10.01, end: 2025.12.31, amount: 144000000, client: "㈜마이비", kind: 운영, status: 완료}
+  - {name: "닷컴 글로벌 표준 CX 디자인 UX/UI 가이드", start: 2025.09.08, end: 2025.12.31, amount: 270000000, client: "삼성전자㈜", kind: 디자인기획, status: 완료}
+  - {name: "SKHy '25년 표준 아키텍처 구축 Ph2 (차세대) (DT)", start: 2025.08.01, end: 2025.12.31, amount: 1999758400, client: "에스케이㈜", kind: 구축, status: 완료}
+  - {name: "25년 국립중앙박물관 모두 플랫폼 개선 및 유지보수", start: 2025.07.01, end: 2025.12.31, amount: 86200000, client: "국립중앙박물관", kind: 유지보수, status: 완료}
+  - {name: "LG LIFE 및 그룹 홈페이지 사이트 운영", start: 2025.01.01, end: 2025.12.31, amount: 661298000, client: "㈜엘지씨엔에스", kind: 운영, status: 완료}
+  - {name: "CELLO SQUARE 5.0 운영고도화 CX 외주계약", start: 2025.01.01, end: 2025.12.31, amount: 1235530000, client: "삼성에스디에스㈜", kind: 운영, status: 완료}
+  - {name: "(주)엘지경영개발원인화원 LG Awards 시스템 운영", start: 2025.01.01, end: 2025.05.31, amount: 30000000, client: "㈜엘지씨엔에스", kind: 운영, status: 완료}
+  - {name: "SKHy 25년 차세대 표준 아키텍쳐 구축 Ph1", start: 2024.12.01, end: 2025.01.31, amount: 220104000, client: "에스케이㈜", kind: 구축, status: 완료}
+  - {name: "S.com Prototype 제작 및 인터랙션 정의", start: 2024.11.01, end: 2024.12.31, amount: 392000000, client: "삼성전자㈜", kind: 디자인기획, status: 완료}
+  - {name: "대체거래소 대응 외주개발(MTS 디자인)", start: 2024.09.23, end: 2025.03.31, amount: 253636364, client: "대신증권㈜", kind: 디자인기획, status: 완료}
+  - {name: "2024년 국립중앙박물관 교육 플랫폼 [모두] 유지보수 사업", start: 2024.07.18, end: 2025.01.14, amount: 100000000, client: "국립중앙박물관", kind: 유지보수, status: 완료, note: "동성아이텍 제출양식 기준"}
+  - {name: "CELLO SQUARE 통합운영플랫폼 구축", start: 2024.04.02, end: 2024.12.31, amount: 1444700000, client: "삼성에스디에스㈜", kind: 구축, status: 완료, note: "이전 제출 서식 기준"}
