@@ -70,15 +70,15 @@ finance:
 
 # 사업수행실적 대장 — 제안서 실적 표의 기준 (사용자 제공 「2. 수행 실적 (에이치나인 1/2 · 2/2)」, 2026-10-21)
 # 항상 최근 계약일(사업 시작일)이 위에 오도록 내림차순으로 유지한다. 새 실적을 받으면 이 목록에 바로 추가한다.
-# amount: 계약금액(원) / kind: AI · 구축 · 디자인기획 · 운영 · 유지보수 / status는 2026-10-21 기준
+# amount: 계약금액(원, VAT 별도 공급가액) / contract_no · contract_date · evidence: 증빙(proposal_kit/company/실적증빙/) 있는 실적만 / kind: AI · 구축 · 디자인기획 · 운영 · 유지보수 / status는 2026-10-21 기준
 # 공고별 인정 여부(예: 운영·유지보수 불인정)는 각 제안서에서 판단해 고른다.
 records:
-  - {name: "SK가스26년Trading AI 사업(PP)", start: 2026.07.01, end: 2026.07.24, amount: 32324620, client: "에스케이㈜", kind: AI, status: 완료}
+  - {name: "SK가스26년Trading AI 사업(PP)", start: 2026.07.01, end: 2026.07.24, amount: 32324620, client: "에스케이㈜", kind: AI, status: 완료, contract_no: "4500311244", contract_date: 2026.06.29, evidence: "실적증빙/2026.07_SK가스_26년_TradingAI_PP_실적증명서.pdf", note: "증명서 SK주식회사 구매1팀 2026.10.20 발급(제출처 동성아이텍)"}
   - {name: "SKHy '26년 표준 아키텍처 구축 Ph3", start: 2026.07.01, end: 2026.12.31, amount: 1107180000, client: "에스케이㈜", kind: 구축, status: 수행중, note: "인하대·순천향대 제안서 기준"}
-  - {name: "서울아산병원 AI-IDP (통합데이터플랫폼) 구축사업", start: 2026.06.10, end: 2027.11.27, amount: 883225000, client: "에스케이㈜", kind: AI, status: 수행중, note: "동성아이텍 제출양식 기준"}
-  - {name: "SKHy '26년 용인 Y1(M17) 제조 DT 시스템 Ph1_FAB MOS_원가선투입", start: 2026.05.01, end: 2026.06.30, amount: 38006760, client: "에스케이㈜", kind: 구축, status: 완료}
-  - {name: "Trading AI Agent 개발 및 ML/DL 분석_선투입", start: 2026.04.08, end: 2026.06.30, amount: 129385380, client: "에스케이㈜", kind: AI, status: 완료}
-  - {name: "SKHy '26년 M14 차세대 제조 시스템 확산_FABMOS_원가선투입", start: 2026.03.16, end: 2026.06.30, amount: 32853200, client: "에스케이㈜", kind: 구축, status: 완료}
+  - {name: "서울아산병원 AI-IDP (통합데이터플랫폼) 구축사업", start: 2026.06.10, end: 2027.11.27, amount: 883225000, client: "에스케이㈜", kind: AI, status: 수행중, contract_no: "4500309354", contract_date: 2026.06.08, evidence: "실적증빙/2026.06_서울아산병원_AI-IDP_주문장_하도급계약서.pdf", note: "주문장/하도급계약서 기준 — 공급가액 883,225,000 (VAT 포함 971,547,500), 발주자 서울아산병원, UI/UX 컨설팅 · 통합포털(BI포털) · 챗 기반 UI 구축 + 무상 MA 12개월"}
+  - {name: "SKHy '26년 용인 Y1(M17) 제조 DT 시스템 Ph1_FAB MOS_원가선투입", start: 2026.05.01, end: 2026.06.30, amount: 34551600, client: "에스케이㈜", kind: 구축, status: 완료, contract_no: "4500307996", contract_date: 2026.04.16, evidence: "실적증빙/2026.05_SKHy_용인Y1_M17_FABMOS_실적증명서.pdf", note: "증명서 SK주식회사 구매1팀 2026.10.20 발급(제출처 동성아이텍) — VAT 별도 34,551,600 (이전 대장 38,006,760은 VAT 포함 금액)"}
+  - {name: "Trading AI Agent 개발 및 ML/DL 분석_선투입", start: 2026.04.08, end: 2026.06.30, amount: 129385380, client: "에스케이㈜", kind: AI, status: 완료, contract_no: "4500307776", contract_date: 2026.04.07, evidence: "실적증빙/2026.04_TradingAI_Agent_ML_DL_실적증명서.pdf", note: "증명서 SK주식회사 구매1팀 2026.10.20 발급(제출처 동성아이텍)"}
+  - {name: "SKHy '26년 M14 차세대 제조 시스템 확산_FABMOS_원가선투입", start: 2026.03.16, end: 2026.06.30, amount: 32853200, client: "에스케이㈜", kind: 구축, status: 완료, contract_no: "4500305698", contract_date: 2026.03.11, evidence: "실적증빙/2026.03_SKHy_M14_FABMOS_실적증명서.pdf", note: "증명서 SK주식회사 구매1팀 2026.10.20 발급(제출처 동성아이텍)"}
   - {name: "SKHy '26년 M15X Ph4 차세대 제조 시스템 _FAB MOS", start: 2026.03.01, end: 2026.06.30, amount: 27440000, client: "에스케이㈜", kind: 구축, status: 완료}
   - {name: "SKHy '26년 표준 아키텍처 구축 Ph3 원가선투입", start: 2026.01.19, end: 2026.06.30, amount: 1170490000, client: "에스케이㈜", kind: 구축, status: 완료}
   - {name: "LG LIFE 및 그룹 홈페이지 사이트 운영", start: 2026.01.01, end: 2026.12.31, amount: 661298000, client: "㈜엘지씨엔에스", kind: 운영, status: 수행중}
