@@ -36,7 +36,8 @@ def slide_pages(content: dict):
     page += 1  # 목차
     out = []
     for ch in content["chapters"]:
-        page += 1  # 간지
+        if not ch.get("front"):
+            page += 1  # 간지 (front 장은 간지 없음)
         for k, spec in enumerate(ch.get("slides", []), start=1):
             page += 1
             ids = [r for r in re.split(r"[,\s]+", spec.get("req") or "") if r]

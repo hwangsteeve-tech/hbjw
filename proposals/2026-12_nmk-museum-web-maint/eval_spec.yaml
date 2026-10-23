@@ -1,0 +1,75 @@
+format: evaluation
+proposer: 주식회사 에이치나인
+title: 기술성 평가항목 조견표 (2027년 국립박물관 대표누리집 통합 유지관리)
+rfp_ref_header: RFP 위치
+evaluation:
+- item: "경영상태"
+  group: "조직 및 인력 (정량)"
+  score: 5
+  rows:
+  - {chapter: "Ⅰ", header: "1. 제안사 일반현황", h3: ['1.2'], label: "경영상태", rfp_page: "Ⅵ.다 기술성 평가기준", rfp_text: "최근년도 경영상태 평가 (정량제안서 별도 제출)"}
+- item: "사업이해도"
+  group: "전략 및 방법론"
+  score: 5
+  rows:
+  - {chapter: "Ⅱ", header: "1. 사업 이해도", h3: [], label: "사업이해도", rfp_page: "Ⅵ.다 기술성 평가기준", rfp_text: "개발목표·내용 이해, 문제파악, 업무분석체계, 목표시스템 구성, 제안요청서 부합성"}
+- item: "추진전략"
+  group: "전략 및 방법론"
+  score: 5
+  rows:
+  - {chapter: "Ⅱ", header: "2. 추진전략", h3: [], label: "추진전략", rfp_page: "Ⅵ.다 기술성 평가기준", rfp_text: "일정 · 위험요소를 고려한 추진전략의 창의성 · 타당성"}
+- item: "시스템 운영 요구사항"
+  group: "운영 및 품질"
+  score: 10
+  rows:
+  - {chapter: "Ⅱ", header: "3. 시스템 운영", h3: [], label: "시스템 운영", rfp_page: "Ⅵ.다 기술성 평가기준", rfp_text: "시스템 운영 절차 및 방법, 비상상황 발생 시 대응방안"}
+- item: "유지관리 인력 요구사항"
+  group: "운영 및 품질"
+  score: 10
+  rows:
+  - {chapter: "Ⅲ", header: "1. 수행조직 및 업무분장", h3: [], label: "수행조직", rfp_page: "Ⅵ.다 기술성 평가기준", rfp_text: "관련 조직 및 참여인력의 적정성"}
+  - {chapter: "Ⅲ", header: "2. 조직운영 및 인력투입계획", h3: [], label: "인력투입", rfp_page: "Ⅵ.다 기술성 평가기준", rfp_text: "투입인력의 타당성, 이력사항"}
+- item: "보안 요구사항"
+  group: "운영 및 품질"
+  score: 5
+  rows:
+  - {chapter: "Ⅳ", header: "4. 보안사항 이행방안", h3: [], label: "보안", rfp_page: "Ⅵ.다 기술성 평가기준", rfp_text: "기술적 보안 구현, 물리적 · 관리적 보안 체계 및 대책"}
+- item: "품질 요구사항"
+  group: "운영 및 품질"
+  score: 5
+  rows:
+  - {chapter: "Ⅲ", header: "3. 정보시스템 유지보수 수행방안", h3: [], label: "유지보수 수행", rfp_page: "Ⅵ.다 기술성 평가기준", rfp_text: "개발 도구 · 구현 · 테스트 방안, 단계별 품질 점검 · 검토 계획"}
+- item: "관리방법론"
+  group: "프로젝트 관리"
+  score: 10
+  rows:
+  - {chapter: "Ⅲ", header: "5. 서비스수준 관리방안", h3: [], label: "SLA", rfp_page: "Ⅵ.다 기술성 평가기준", rfp_text: "일정 · 위험(이슈) · 보안 · 형상 · 문서 관리, 보고 체계"}
+  - {chapter: "Ⅲ", header: "6. 위험 및 이슈관리방안", h3: [], label: "위험 · 이슈", rfp_page: "Ⅵ.다 기술성 평가기준", rfp_text: "문제 발생 시 보고 체계 및 위험관리 방안"}
+  - {chapter: "Ⅲ", header: "8. 보고 및 검토계획", h3: [], label: "보고 · 검토", rfp_page: "Ⅵ.다 기술성 평가기준", rfp_text: "보고회의 · 검토계획"}
+  - {chapter: "Ⅲ", header: "9. 기타 관리방안", h3: [], label: "기타 관리", rfp_page: "Ⅵ.다 기술성 평가기준", rfp_text: "전자적 사업진척관리, EA 관리"}
+- item: "일정계획"
+  group: "프로젝트 관리"
+  score: 10
+  rows:
+  - {chapter: "Ⅲ", header: "7. 추진일정계획", h3: [], label: "일정", rfp_page: "Ⅵ.다 기술성 평가기준", rfp_text: "세부활동 · 기간 · 배열, 중간목표, 자원배분"}
+- item: "품질보증"
+  group: "프로젝트 지원"
+  score: 5
+  rows:
+  - {chapter: "Ⅲ", header: "4. 품질보증방안", h3: [], label: "품질보증", rfp_page: "Ⅵ.다 기술성 평가기준", rfp_text: "품질보증계획 · 인력 · 사업자 보증 능력, SP인증 등 품질인증"}
+- item: "교육훈련"
+  group: "프로젝트 지원"
+  score: 5
+  rows:
+  - {chapter: "Ⅳ", header: "1. 교육훈련계획", h3: [], label: "교육훈련", rfp_page: "Ⅵ.다 기술성 평가기준", rfp_text: "교육훈련 방법 · 내용 · 일정 · 조직"}
+  - {chapter: "Ⅳ", header: "3. 기술이전계획", h3: [], label: "기술이전", rfp_page: "Ⅵ.다 기술성 평가기준", rfp_text: "운영 노하우 기술이전"}
+- item: "유지관리"
+  group: "프로젝트 지원"
+  score: 10
+  rows:
+  - {chapter: "Ⅳ", header: "2. 운영지원계획", h3: [], label: "운영지원", rfp_page: "Ⅵ.다 기술성 평가기준", rfp_text: "유지관리 계획 · 조직 · 절차 · 범위 · 기간"}
+- item: "비상대책"
+  group: "프로젝트 지원"
+  score: 5
+  rows:
+  - {chapter: "Ⅳ", header: "5. 비상대책계획", h3: [], label: "비상대책", rfp_page: "Ⅵ.다 기술성 평가기준", rfp_text: "백업 / 복구 대책, 장애대응 대책"}

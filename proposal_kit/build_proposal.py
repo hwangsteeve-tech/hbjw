@@ -423,7 +423,7 @@ class Body:
         self.overflow = False
         s = self.s
         _replace_text(_shape_by_name(s, "텍스트 개체 틀 9"), spec["header"])
-        _replace_text(_shape_by_name(s, "TextBox 28"), f"{chapter['num']}. {chapter['title']}")
+        _replace_text(_shape_by_name(s, "TextBox 28"), f"{chapter['num']}. {chapter['title']}" if chapter.get("num") else chapter["title"])
         _replace_text(_shape_by_name(s, "직사각형 2"), spec.get("h2", " "))
         h3 = _shape_by_name(s, "직사각형 1")
         _replace_text(h3, spec.get("h3", " "))
@@ -923,7 +923,8 @@ def build(content_path: Path, out_path: Path, template: Path = BASE_TEMPLATE, re
 
     build_cover(prs, meta)
     req_slide = _duplicate(prs, PROTO_REQ) if data.get("req_table", True) else None
-    build_toc(prs, chapters)
+    # front: true 장은 간지 없이 목차 뒤에 바로 놓고 목차에도 넣지 않는다 (예: 앞장 평가항목 조견표)
+    build_toc(prs, [c for c in chapters if not c.get("front")])
 
     n_ids = sum(len(c["ids"]) for c in data.get("req_categories", []))
     req_extra = max(0, -(-n_ids // 44) - 1) if req_slide is not None else 0
@@ -931,7 +932,8 @@ def build(content_path: Path, out_path: Path, template: Path = BASE_TEMPLATE, re
     fill = []
     for ch in chapters:
         ch.setdefault("toc", [])
-        build_divider(prs, ch)
+        if not ch.get("front"):
+            build_divider(prs, ch)
         for k, spec in enumerate(ch.get("slides", []), start=1):
             body = _render_body(prs, ch, spec, auto_fit=data.get("auto_fit", True))
             page = len(prs.slides) - n_proto + req_extra

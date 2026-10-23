@@ -1,0 +1,101 @@
+format: compliance
+proposer: 주식회사 에이치나인
+title: 요구사항 대비 수용여부 조견표 (2027년 국립박물관 대표누리집 통합 유지관리)
+columns: [요구사항 고유번호, 요구사항 명칭, 제안서 목차, 쪽수, 수용 여부, 비고]
+requirements:
+  MAR-001:
+    name: "13개 소속박물관 누리집 통합 유지관리 기본 요건"
+    comply: 수용
+  MAR-002:
+    name: "SR(서비스요청) 접수·처리 체계 및 도구"
+    comply: 수용
+  MAR-003:
+    name: "유지관리 수행 체계 및 장애 관리"
+    comply: 수용
+  MAR-004:
+    name: "소규모 기능개선 및 서비스 개선"
+    comply: 수용
+  MAR-005:
+    name: "성능 관리 및 웹 최적화"
+    comply: 수용
+  MAR-006:
+    name: "소스·산출물 백업 및 형상관리"
+    comply: 수용
+  MAR-007:
+    name: "통계 관리 및 정기 보고"
+    comply: 수용
+  MAR-008:
+    name: "이용자 만족도 조사 및 개선"
+    comply: 수용
+  MAR-009:
+    name: "누리집 모니터링단 운영"
+    comply: 수용
+  MAR-010:
+    name: "웹 접근성 품질인증 획득·갱신 지원"
+    comply: 수용
+  MHR-001:
+    name: "투입인력 요건"
+    comply: 수용
+  MHR-002:
+    name: "투입인력 변경관리"
+    comply: 수용
+  MHR-003:
+    name: "투입인력 관리"
+    comply: 수용
+  PMR-001:
+    name: "정보시스템 관련 지침 준수"
+    comply: 수용
+  PMR-002:
+    name: "사업장 운영방안 및 유지관리 업무환경 마련"
+    comply: 수용
+  PMR-003:
+    name: "하도급 관리"
+    comply: 수용
+  PMR-004:
+    name: "SW사업정보 데이터 작성 및 제출"
+    comply: 수용
+  PMR-005:
+    name: "산출물 및 형상관리"
+    comply: 수용
+  PSR-001:
+    name: "유지관리 업무 인수인계 시 품질 유지"
+    comply: 수용
+  PSR-002:
+    name: "기술지원"
+    comply: 수용
+  PSR-003:
+    name: "관련기관 간 원활한 협조체계 유지 및 운영방안"
+    comply: 수용
+  PSR-004:
+    name: "기술 이전 및 교육"
+    comply: 수용
+  PSR-005:
+    name: "문화체육관광부 <공공문화정보 통합관리시스템>과 정보 연계 추진"
+    comply: 수용
+  SER-001:
+    name: "보안지침 준수"
+    comply: 수용
+  SER-002:
+    name: "데이터보안"
+    comply: 수용
+  SER-003:
+    name: "시큐어코딩 준수 및 웹 취약점 제거"
+    comply: 수용
+  SER-004:
+    name: "사업 수행에 대한 보안정책 및 지침준수"
+    comply: 수용
+  QUR-001:
+    name: "정보시스템 운영 전반에 대한 품질관리"
+    comply: 수용
+  COR-001:
+    name: "지적 재산권 및 계약일반사항"
+    comply: 수용
+  COR-002:
+    name: "손해배상 범위"
+    comply: 수용
+  COR-003:
+    name: "제재방안 범위"
+    comply: 수용
+  COR-004:
+    name: "계약의 해지, 해제 범위"
+    comply: 수용
