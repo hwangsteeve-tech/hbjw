@@ -238,6 +238,27 @@ def _delete_slide(prs, index):
 
 # ---------------------------------------------------------------- 고정 슬라이드
 
+def _fit_cover_title(title, lines, page_w=6858000, margin=360000):
+    """표지 제목은 오른쪽 정렬 · 줄바꿈 없음이라 긴 제목은 페이지 오른쪽 밖으로 나간다.
+    오른쪽 끝은 그대로 두고 상자를 왼쪽으로 넓히고, 그래도 넘치면 제목 글자 크기를 줄인다."""
+    def em(ln):
+        return sum(1.0 if ord(c) > 0x2E80 else 0.3 if c == " " else 0.6 for c in ln)
+    paras = title.text_frame._txBody.findall(qn("a:p"))[1:]
+    sz = int(paras[0].find(qn("a:r")).find(qn("a:rPr")).get("sz", "2800")) if paras else 2800
+    right = title.left + title.width
+    need = int(max(em(ln) for ln in lines) * sz / 100 * 12700 * 1.05)
+    if need <= title.width:
+        return
+    room = right - margin
+    if need > room:
+        sz = int(sz * room / need) // 100 * 100
+        for p_ in paras:
+            for r in p_.findall(qn("a:r")):
+                r.find(qn("a:rPr")).set("sz", str(sz))
+        need = room
+    title.left, title.width = right - need, need
+
+
 def build_cover(prs, meta):
     s = _duplicate(prs, PROTO_COVER)
     title = _shape_by_name(s, "TextBox 5")
@@ -258,6 +279,7 @@ def build_cover(prs, meta):
             p_.remove(r)
         runs[0].find(qn("a:t")).text = ln
         txBody.append(p_)
+    _fit_cover_title(title, meta["title_lines"])
     _replace_text(_shape_by_name(s, "TextBox 6"), meta.get("pm_line", "사업PM ○○○ 파트너"))
     orgs = meta.get("org_lines", [])
     if orgs:
