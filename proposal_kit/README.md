@@ -8,7 +8,7 @@ proposal_kit/
 ├─ build_proposal.py        생성기
 ├─ templates/h9_base.pptx   기본 양식 (표지·분석표·목차·간지·본문 원형 5장)
 └─ reference/               실제 제출본 예시 (AI학습용데이터 통합 제공 시스템, 220장)
-proposals/<연월>_<사업명>/content.yaml   사업별 내용 파일
+proposals/<기관-공고번호>/content.yaml   사업별 내용 파일
 ```
 
 ## 실행

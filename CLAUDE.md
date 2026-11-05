@@ -9,7 +9,7 @@
 - 쪽번호는 항상 전체 쪽수(표지부터 센 문서 쪽수)를 본문 하단에만 넣는다. 장별(Ⅲ-5) 쪽번호는 쓰지 않으며 표지·목차·장 표지에는 표시하지 않는다 (build_proposal.py에서 고정).
 - 정성제안서는 항상 `proposal_kit`의 H9 양식(세로 A4, templates/h9_base.pptx)으로 PPT 파일을 만든다.
   형식 기준은 `proposal_kit/reference/`의 실제 제출본 예시를 따른다.
-- 사업별 내용은 `proposals/<연월>_<사업명>/content.yaml`에 작성하고
+- 사업별 내용은 `proposals/<기관-공고번호>/content.yaml`에 작성하고
   `python -m proposal_kit.build_proposal <content.yaml> -o <출력.pptx> --report`로 빌드한다.
 - 목차는 해당 RFP의 "제안서 작성 목차(권고)"와 기술평가 항목을 따르고, 본문 슬라이드마다 요구사항 ID(`req`)를 단다.
 - 회사 고유 정보(실적·인력·신용등급·인증)는 확인되지 않으면 `【 】`로 남기고 지어내지 않는다.
