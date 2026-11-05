@@ -1,0 +1,136 @@
+format: evaluation
+proposer: 주식회사 에이치나인
+title: 기술평가 항목 조견표 (AI기반 조사 데이터 구조화 및 분석 기술 개발)
+rfp_ref_header: 제안요청서 위치
+evaluation:
+- item: "경영상태"
+  group: "정량평가"
+  score: 5
+  rows:
+  - {chapter: "Ⅱ", header: "2. 자본금, 매출액, 이익률, 이익금액 (최근 3년)", h3: [], label: "경영상태", rfp_page: "[붙임 1] (1) 정량평가", rfp_text: "신용등급에 의한 경영상태 안정성"}
+- item: "수행실적"
+  group: "정량평가"
+  score: 5
+  rows:
+  - {chapter: "Ⅱ", header: "4. 주요 사업실적 및 내용", h3: [], label: "수행실적", rfp_page: "[붙임 1] (1) 정량평가", rfp_text: "최근 3년 정보시스템 구축 사업수행실적 (금액 기준)"}
+- item: "사업이해도"
+  group: "전략 및 방법론"
+  score: 3
+  rows:
+  - {chapter: "Ⅰ", header: "1. 제안목적 및 배경", h3: [], label: "사업 이해", rfp_page: "[붙임 1] (2) 정성평가", rfp_text: "사업 특성 · 목표, 주변 환경과 업무 연관관계 이해"}
+  - {chapter: "Ⅰ", header: "2. 제안범위", h3: [], label: "범위", rfp_page: "[붙임 1] (2) 정성평가", rfp_text: "일관성 있는 방향과 전략"}
+- item: "추진전략"
+  group: "전략 및 방법론"
+  score: 3
+  rows:
+  - {chapter: "Ⅰ", header: "3. 사업수행 추진전략", h3: [], label: "추진전략", rfp_page: "[붙임 1] (2) 정성평가", rfp_text: "위험요소를 고려한 창의적 · 타당한 대안"}
+- item: "적용기술"
+  group: "전략 및 방법론"
+  score: 3
+  rows:
+  - {chapter: "Ⅲ", header: "1. 시스템 구성도", h3: [], label: "적용기술", rfp_page: "[붙임 1] (2) 정성평가", rfp_text: "확장성을 고려한 실현 가능한 적용 기술"}
+  - {chapter: "Ⅲ", header: "6. 향후 시스템 발전방안", h3: [], label: "확장성", rfp_page: "[붙임 1] (2) 정성평가", rfp_text: "향후 확장성"}
+- item: "표준 프레임워크 적용"
+  group: "전략 및 방법론"
+  score: 3
+  rows:
+  - {chapter: "Ⅲ", header: "3. 소프트웨어 개발방안", h3: ['3.1', '3.3'], label: "표준 프레임워크", rfp_page: "[붙임 1] (2) 정성평가", rfp_text: "표준 프레임워크 사용 계획 · 예상 문제점 · 대응"}
+- item: "개발방법론"
+  group: "전략 및 방법론"
+  score: 3
+  rows:
+  - {chapter: "Ⅲ", header: "3. 소프트웨어 개발방안", h3: ['3.2'], label: "방법론", rfp_page: "[붙임 1] (2) 정성평가", rfp_text: "방법론 타당성 · 단계별 활동 · 산출물"}
+- item: "기능요구사항"
+  group: "기술 및 기능"
+  score: 5
+  rows:
+  - {chapter: "Ⅲ", header: "2. 시스템 구축방안", h3: ['2.1', '2.2', '2.3', '2.4', '2.5', '2.6', '2.7'], label: "기능", rfp_page: "[붙임 1] (2) 정성평가", rfp_text: "분석 · 구현 방안 구체성, 적용 가능성"}
+- item: "보안요구사항"
+  group: "기술 및 기능"
+  score: 3
+  rows:
+  - {chapter: "Ⅴ", header: "2. 기밀보안계획", h3: ['2.2', '2.3'], label: "보안", rfp_page: "[붙임 1] (2) 정성평가", rfp_text: "설계단계부터 반영된 보안 표준 · 구현 방안"}
+- item: "데이터요구사항"
+  group: "기술 및 기능"
+  score: 10
+  rows:
+  - {chapter: "Ⅲ", header: "4. 표준화 방안", h3: [], label: "데이터", rfp_page: "[붙임 1] (2) 정성평가", rfp_text: "데이터 전환 계획 · 검증, 에러 데이터 처리, 전환 책임 조직"}
+- item: "시스템운영요구사항"
+  group: "기술 및 기능"
+  score: 3
+  rows:
+  - {chapter: "Ⅲ", header: "5. 시스템 시험 및 운영 방안", h3: ['5.3.2'], label: "운영", rfp_page: "[붙임 1] (2) 정성평가", rfp_text: "운영 시 필요 사항 · 유사 시 대응책"}
+- item: "제약사항"
+  group: "기술 및 기능"
+  score: 4
+  rows:
+  - {chapter: "Ⅰ", header: "2. 제안범위", h3: ['2.2'], label: "전제 · 제약", rfp_page: "[붙임 1] (2) 정성평가", rfp_text: "요구사항 구현 시 제약사항 충족 · 구현 · 테스트 방안"}
+  - {chapter: "Ⅳ", header: "3. 개발환경 구성 계획", h3: [], label: "개발 제약", rfp_page: "[붙임 1] (2) 정성평가", rfp_text: "외부 전송 금지 · 자체 GPU"}
+- item: "성능요구사항"
+  group: "성능 및 품질"
+  score: 5
+  rows:
+  - {chapter: "Ⅲ", header: "5. 시스템 시험 및 운영 방안", h3: ['5.2'], label: "성능", rfp_page: "[붙임 1] (2) 정성평가", rfp_text: "요구 성능 충족 구현 · 테스트 방안"}
+  - {chapter: "Ⅲ", header: "2. 시스템 구축방안", h3: ['2.6.1'], label: "LLM 성능", rfp_page: "[붙임 1] (2) 정성평가", rfp_text: "응답 속도"}
+- item: "품질요구사항"
+  group: "성능 및 품질"
+  score: 5
+  rows:
+  - {chapter: "Ⅳ", header: "1. 품질보증 계획", h3: ['1.2'], label: "품질", rfp_page: "[붙임 1] (2) 정성평가", rfp_text: "단계별 품질 요구사항 점검 · 검토 방안"}
+  - {chapter: "Ⅲ", header: "5. 시스템 시험 및 운영 방안", h3: ['5.1'], label: "시험", rfp_page: "[붙임 1] (2) 정성평가", rfp_text: "분석 도구 · 테스트 방안"}
+- item: "인터페이스요구사항"
+  group: "성능 및 품질"
+  score: 5
+  rows:
+  - {chapter: "Ⅲ", header: "2. 시스템 구축방안", h3: ['2.7', '2.8'], label: "인터페이스", rfp_page: "[붙임 1] (2) 정성평가", rfp_text: "시스템 · 사용자 인터페이스 방안, 담당자 경험"}
+- item: "관리방법론"
+  group: "프로젝트 관리"
+  score: 4
+  rows:
+  - {chapter: "Ⅳ", header: "2. 추진계획 및 일정", h3: ['2.1', '2.3'], label: "관리", rfp_page: "[붙임 1] (2) 정성평가", rfp_text: "위험 · 진도 · 보안 · 형상 · 문서 관리"}
+- item: "일정계획"
+  group: "프로젝트 관리"
+  score: 3
+  rows:
+  - {chapter: "Ⅳ", header: "2. 추진계획 및 일정", h3: ['2.2'], label: "일정", rfp_page: "[붙임 1] (2) 정성평가", rfp_text: "활동 기간 · 배열 · 중간목표 · 자원 할당"}
+- item: "개발장비"
+  group: "프로젝트 관리"
+  score: 3
+  rows:
+  - {chapter: "Ⅳ", header: "3. 개발환경 구성 계획", h3: [], label: "개발환경", rfp_page: "[붙임 1] (2) 정성평가", rfp_text: "개발환경 구성 여부 · 해결방안"}
+- item: "안전보건 확보방안"
+  group: "프로젝트 관리"
+  score: 5
+  rows:
+  - {chapter: "Ⅳ", header: "2. 추진계획 및 일정", h3: ['2.4'], label: "안전보건", rfp_page: "[붙임 1] (4) 안전보건관리계획서", rfp_text: "안전보건관리계획서 적정성"}
+- item: "품질보증"
+  group: "프로젝트 지원"
+  score: 2
+  rows:
+  - {chapter: "Ⅳ", header: "1. 품질보증 계획", h3: ['1.1'], label: "품질보증", rfp_page: "[붙임 1] (2) 정성평가", rfp_text: "품질보증 방안 · 품질 인증"}
+- item: "시험운영"
+  group: "프로젝트 지원"
+  score: 1
+  rows:
+  - {chapter: "Ⅲ", header: "5. 시스템 시험 및 운영 방안", h3: ['5.3.1'], label: "시험운영", rfp_page: "[붙임 1] (2) 정성평가", rfp_text: "시험운영 방법 · 조직"}
+- item: "교육훈련"
+  group: "프로젝트 지원"
+  score: 1
+  rows:
+  - {chapter: "Ⅴ", header: "1. 교육훈련 및 지원방안", h3: [], label: "교육", rfp_page: "[붙임 1] (2) 정성평가", rfp_text: "교육훈련 방법 · 내용 · 일정 · 조직"}
+  - {chapter: "Ⅴ", header: "4. 기술이전계획", h3: [], label: "기술이전", rfp_page: "[붙임 1] (2) 정성평가", rfp_text: "기술이전"}
+- item: "하자보수"
+  group: "프로젝트 지원"
+  score: 2
+  rows:
+  - {chapter: "Ⅴ", header: "3. 하자보수계획", h3: [], label: "하자보수", rfp_page: "[붙임 1] (2) 정성평가", rfp_text: "하자보수 계획 · 조직 · 절차 · 범위 · 기간"}
+- item: "기밀보안"
+  group: "프로젝트 지원"
+  score: 2
+  rows:
+  - {chapter: "Ⅴ", header: "2. 기밀보안계획", h3: ['2.1'], label: "기밀보안", rfp_page: "[붙임 1] (2) 정성평가", rfp_text: "기밀 보호 체계 · 대책"}
+- item: "비상대책"
+  group: "프로젝트 지원"
+  score: 2
+  rows:
+  - {chapter: "Ⅴ", header: "5. 기타 지원사항", h3: ['5.1'], label: "비상대책", rfp_page: "[붙임 1] (2) 정성평가", rfp_text: "백업 · 복구 · 장애대응 대책"}
